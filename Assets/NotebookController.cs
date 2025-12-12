@@ -4,6 +4,24 @@ using System; // Necesario para System.Action
 
 public class NotebookController : MonoBehaviour
 {
+    // -------------------------------------------------------------------
+    // AÑADIDO: Implementación de Singleton para fácil acceso
+    // -------------------------------------------------------------------
+    public static NotebookController Instance { get; private set; }
+
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+    // -------------------------------------------------------------------
+
     [Header("Configuración de Puntos de Anclaje")]
     [Tooltip("El punto donde el cuaderno debe aparecer (GripPoint en la mano).")]
     public Transform gripPoint;
@@ -20,6 +38,7 @@ public class NotebookController : MonoBehaviour
 
     private bool isNotebookActive = false;
     private Coroutine activeAnimation;
+    private bool uiIsPending = false; // Bandera para saber si la UI debe activarse
 
     // --- MÉTODOS ESTÁNDAR DE UNITY ---
 
@@ -28,7 +47,8 @@ public class NotebookController : MonoBehaviour
         // 1. Posicionar en el Holster y desactivar al inicio.
         transform.position = holsterPoint.position;
         transform.rotation = holsterPoint.rotation;
-        gameObject.SetActive(false);
+        // Se mantiene activo si ya está en la escena, pero se mueve.
+        // gameObject.SetActive(false); // <--- Lo activará ToggleNotebook si es necesario
 
         // 2. Asegurarse de que el panel de UI de fin de nivel esté escondido al inicio.
         if (endLevelUIPanel != null)
@@ -39,21 +59,13 @@ public class NotebookController : MonoBehaviour
 
     // --- LÓGICA DE APARICIÓN/DESAPARICIÓN ---
 
-    /// <summary>
-    /// Devuelve el estado actual del cuaderno.
-    /// </summary>
     public bool IsActive()
     {
         return isNotebookActive;
     }
 
-    /// <summary>
-    /// Alterna el estado del cuaderno (Desplegar/Guardar).
-    /// Esta función se conecta a la Input Action de RV del jugador.
-    /// </summary>
     public void ToggleNotebook()
     {
-        // Si ya hay una animación en curso, detenla antes de iniciar una nueva.
         if (activeAnimation != null)
         {
             StopCoroutine(activeAnimation);
@@ -63,15 +75,24 @@ public class NotebookController : MonoBehaviour
 
         if (isNotebookActive)
         {
-            // Desplegar: 
-            // Asegura que el GameObject esté activo antes de animar.
+            // Desplegar:
             gameObject.SetActive(true);
-            activeAnimation = StartCoroutine(AnimateMovement(holsterPoint, gripPoint));
+            activeAnimation = StartCoroutine(AnimateMovement(holsterPoint, gripPoint, () =>
+            {
+                // CALLBACK: Después de desplegarse, verifica si la UI de fin de nivel está pendiente
+                if (uiIsPending)
+                {
+                    ActivateEndLevelUI();
+                }
+            }));
             Debug.Log("NotebookController: Cuaderno desplegado.");
         }
         else
         {
-            // Guardar: 
+            // Guardar:
+            // Asegúrate de desactivar la bandera de UI pendiente si el jugador lo cierra
+            uiIsPending = false;
+
             // Esconde la UI de Fin de Nivel inmediatamente si está visible.
             if (endLevelUIPanel != null)
             {
@@ -87,42 +108,46 @@ public class NotebookController : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Corrutina para animar la posición y rotación del cuaderno.
-    /// </summary>
     private IEnumerator AnimateMovement(Transform startPoint, Transform endPoint, Action onComplete = null)
     {
         float elapsedTime = 0f;
 
-        // Establecer la posición inicial
         transform.position = startPoint.position;
         transform.rotation = startPoint.rotation;
 
         while (elapsedTime < animationDuration)
         {
             float t = elapsedTime / animationDuration;
-            // Usar SmoothStep para un movimiento más orgánico (empieza lento, rápido en el medio, termina lento)
             t = Mathf.SmoothStep(0f, 1f, t);
 
-            // Interpolación de posición y rotación
             transform.position = Vector3.Lerp(startPoint.position, endPoint.position, t);
             transform.rotation = Quaternion.Lerp(startPoint.rotation, endPoint.rotation, t);
 
             elapsedTime += Time.deltaTime;
-            yield return null; // Espera un frame
+            yield return null;
         }
 
-        // Asegura la posición final exacta
         transform.position = endPoint.position;
         transform.rotation = endPoint.rotation;
 
         // Ejecuta la función de completado (si existe)
         onComplete?.Invoke();
 
-        activeAnimation = null; // Finaliza la corrutina
+        activeAnimation = null;
     }
 
-    // --- FUNCIÓN DE FIN DE NIVEL (LLAMADA POR EL GAMEMANAGER) ---
+    // --- FUNCIÓN DE FIN DE NIVEL (LÓGICA CENTRAL) ---
+
+    private void ActivateEndLevelUI()
+    {
+        if (endLevelUIPanel != null)
+        {
+            endLevelUIPanel.SetActive(true);
+            uiIsPending = false; // La UI ya no está pendiente
+            Debug.Log("NotebookController: UI de opciones de fin de nivel ACTIVADA.");
+            // Opcional: Time.timeScale = 0f; si quieres pausar el juego
+        }
+    }
 
     /// <summary>
     /// Muestra el cuaderno y el panel de opciones de fin de nivel.
@@ -130,20 +155,19 @@ public class NotebookController : MonoBehaviour
     /// </summary>
     public void ShowEndLevelUI()
     {
-        // 1. Despliega el cuaderno si no está activo
-        if (!isNotebookActive)
-        {
-            // Al hacer Toggle, se activará el objeto y la animación de despliegue.
-            ToggleNotebook();
-        }
+        if (endLevelUIPanel.activeSelf) return; // Ya está mostrando la UI
 
-        // 2. Activa la UI de botones
-        if (endLevelUIPanel != null)
+        // 1. Si el cuaderno ya está activo, muestra la UI inmediatamente.
+        if (isNotebookActive)
         {
-            // Podríamos usar una Corrutina con un pequeño delay aquí para que la UI no aparezca 
-            // hasta que el cuaderno esté completamente desplegado (al final del Lerp).
-            endLevelUIPanel.SetActive(true);
-            Debug.Log("NotebookController: UI de opciones de fin de nivel activada.");
+            ActivateEndLevelUI();
+        }
+        else
+        {
+            // 2. Si el cuaderno está guardado, marca la bandera y usa ToggleNotebook()
+            uiIsPending = true;
+            gameObject.SetActive(true); // Asegura que el objeto esté activo para que Toggle pueda animar
+            ToggleNotebook();
         }
     }
 }

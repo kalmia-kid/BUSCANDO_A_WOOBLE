@@ -32,6 +32,23 @@ public class GameManager : MonoBehaviour
     // --- FUNCIONES LLAMADAS POR LOS BOTONES DEL CUADERNO ---
 
     /// <summary>
+    /// Intenta esconder la UI del cuaderno y carga una escena.
+    /// Esto ayuda a limpiar la UI antes de la transición de escena.
+    /// </summary>
+    private void HideNotebookAndLoadScene(int sceneIndex)
+    {
+        // Esconde la UI del cuaderno (si está activo, esto inicia la animación de guardado)
+        if (notebookController != null && notebookController.IsActive())
+        {
+            notebookController.ToggleNotebook();
+        }
+
+        // Carga la escena inmediatamente
+        SceneManager.LoadScene(sceneIndex);
+    }
+
+
+    /// <summary>
     /// Reinicia el nivel actual.
     /// Esta función se conecta al botón "Reiniciar" del cuaderno.
     /// </summary>
@@ -39,21 +56,15 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("GameManager: Reiniciando nivel...");
 
-        // Opcional: Esconder el cuaderno si todavía está activo
-        if (notebookController != null && notebookController.IsActive())
-        {
-            notebookController.ToggleNotebook();
-        }
-
-        // Recarga la escena actual
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        HideNotebookAndLoadScene(currentSceneIndex);
     }
 
     /// <summary>
     /// Carga la siguiente escena en el orden de Build Settings.
     /// Esta función se conecta al botón "Siguiente Nivel" del cuaderno.
     /// </summary>
-    public void LoadNextLevel()
+    public void NextLevel()
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         int nextSceneIndex = currentSceneIndex + 1;
@@ -61,19 +72,13 @@ public class GameManager : MonoBehaviour
         if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
         {
             Debug.Log("GameManager: Cargando el siguiente nivel (Index: " + nextSceneIndex + ")");
-            // Opcional: Esconder el cuaderno si todavía está activo
-            if (notebookController != null && notebookController.IsActive())
-            {
-                // ToggleNotebook() maneja la animación de guardado.
-                notebookController.ToggleNotebook();
-            }
-            SceneManager.LoadScene(nextSceneIndex);
+            HideNotebookAndLoadScene(nextSceneIndex);
         }
         else
         {
-            Debug.LogWarning("GameManager: No hay más niveles. Cargando menú principal o escena final.");
+            Debug.LogWarning("GameManager: No hay más niveles. Cargando menú principal.");
             // Si no hay más niveles, vuelve al menú principal.
-            SceneManager.LoadScene(MainMenuSceneIndex);
+            HideNotebookAndLoadScene(MainMenuSceneIndex);
         }
     }
 
@@ -95,19 +100,21 @@ public class GameManager : MonoBehaviour
     // --- FUNCIONES LLAMADAS POR LA LÓGICA DEL JUEGO ---
 
     /// <summary>
-    /// Función de ejemplo que se llamaría cuando Wooble es atrapado y la misión se completa.
+    /// Función que se llama cuando Wooble es atrapado y la misión se completa.
+    /// Inicia la secuencia de Fin de Nivel en la UI del cuaderno.
     /// </summary>
     public void OnMissionComplete()
     {
         Debug.Log("GameManager: Misión Wooble completada. Mostrando UI de fin de nivel.");
 
-        // 1. Mostrar el cuaderno
+        // 1. Mostrar el cuaderno (el cuaderno manejará la lógica de abrirse y mostrar la UI después de la animación)
         if (notebookController != null)
         {
             notebookController.ShowEndLevelUI();
         }
 
         // 2. Aquí iría la lógica para detener el tiempo, pausar el input principal, etc.
+        // Time.timeScale = 0f; // Si deseas pausar completamente el juego.
     }
 
     // Puedes añadir una función para la alarma del reloj aquí:
