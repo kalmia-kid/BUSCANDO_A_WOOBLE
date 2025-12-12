@@ -870,6 +870,15 @@
             "id": "7a5e7537-cc30-4eb1-a544-6946baa8f3eb",
             "actions": [
                 {
+                    "name": "Select",
+                    "type": "Button",
+                    "id": "62c7ea32-748f-4077-8d41-ad89d69340b8",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "LeftHandNotebookToggle",
                     "type": "Button",
                     "id": "33754c03-48ec-46ef-9bc6-22ed6bfdd8e8",
@@ -992,56 +1001,45 @@
                 },
                 {
                     "name": "",
-                    "id": "73325635-d9e5-481a-9279-ae7be089422d",
+                    "id": "48991857-dcf7-4cd5-8082-9af7cce9e440",
+                    "path": "<XRController>{LeftHand}/{GripButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "71894df2-4a9d-42e9-a909-5a862f1bcedb",
                     "path": "<MetaAimHand>{LeftHand}/indexPressed",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "LeftHandNotebookToggle",
+                    "action": "Select",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "3bbf9f24-2edd-41b9-8456-683298f1e58c",
-                    "path": "<HandInteraction>{LeftHand}/graspFirm",
+                    "id": "214bf432-929d-431c-8611-fa206d86c68e",
+                    "path": "<XRHandDevice>{LeftHand}/graspFirm",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "LeftHandNotebookToggle",
+                    "action": "Select",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "a86585c7-1d41-40e2-a7ca-bb76cca5c32a",
-                    "path": "<HandInteraction>{LeftHand}/pinchTouched",
+                    "id": "fa6c0eb8-63c2-444b-9a4c-264202dfe4ec",
+                    "path": "<XRHandDevice>{LeftHand}/pinchTouched",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "LeftHandNotebookToggle",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "ebab6345-d4f7-4a42-94b3-12d4464de218",
-                    "path": "<HoloLensHand>{LeftHand}/squeezePressed",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "LeftHandNotebookToggle",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "87d9a1e7-704b-43bb-be2a-f2d8ecfde8b7",
-                    "path": "<KHRSimpleController>{LeftHand}/select",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "LeftHandNotebookToggle",
+                    "action": "Select",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

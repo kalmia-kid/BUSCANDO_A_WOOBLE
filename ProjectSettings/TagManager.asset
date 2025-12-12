@@ -5,11 +5,12 @@ TagManager:
   serializedVersion: 3
   tags:
   - Anchor
+  - Wooble
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Grabable
   - Water
   - UI
   - 

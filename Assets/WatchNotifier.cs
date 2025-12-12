@@ -32,7 +32,10 @@ public class WatchNotifier : MonoBehaviour
         {
             messageText.text = "";
         }
-    }
+        // este mensaje es temporal, hay que hacer una lista con los diferentes mensajes 
+        string message = "Wooble ha escapado, atrápalo!";
+        DisplayAlarm(message);
+    } 
 
     /// <summary>
     /// Muestra un mensaje de alarma (llamada por GameManager/Wooble).
@@ -57,7 +60,6 @@ public class WatchNotifier : MonoBehaviour
     {
         // Muestra el mensaje de alarma
         messageText.text = message;
-        messageText.color = Color.red; // Color de alarma
 
         yield return new WaitForSeconds(displayDuration);
 
