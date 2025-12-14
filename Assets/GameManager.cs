@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 using UnityEngine.XR.Interaction.Toolkit;
-// << AÑADIDO: NECESARIO para acceder a VignetteParameters y ITunnelingVignetteProvider >>
 using UnityEngine.XR.Interaction.Toolkit.Locomotion.Comfort;
 
 public class GameManager : MonoBehaviour
@@ -15,29 +14,27 @@ public class GameManager : MonoBehaviour
     [Tooltip("Arrastra aquí el objeto con el script NotebookController.")]
     public NotebookController notebookController;
 
+    [Tooltip("Arrastra aquí el objeto con el script UIManager.")]
+    public UIManager uiManager;
+
     [Header("VR Sickness Mitigation")]
     [Tooltip("Arrastra el componente TunnelingVignetteController del XR Rig/Camera.")]
     [SerializeField]
     private TunnelingVignetteController _vignetteController;
 
-    // << NUEVO CAMPO: TIEMPO DE FUNDIDO MANUAL >>
     [Tooltip("El tiempo que tarda el fundido a negro (Ease In Time) y el fundido a abierto (Ease Out Time).")]
     public float VignetteFadeDuration = 0.5f;
 
     private const int MainMenuSceneIndex = 0;
 
-    // << NUEVOS CAMPOS: Para implementar el Provider Pattern >>
     private SceneTransitionProvider _sceneTransitionProvider;
     private VignetteParameters _transitionVignetteParameters;
 
-
-    // << NUEVA CLASE: Implementa la interfaz ITunnelingVignetteProvider >>
-    // Esta clase nos permite llamar a Begin/EndTunnelingVignette
+    // << CLASE SceneTransitionProvider (se mantiene sin cambios) >>
     private class SceneTransitionProvider : ITunnelingVignetteProvider
     {
         public VignetteParameters Parameters;
 
-        // Propiedad requerida por la interfaz, que devuelve nuestros parámetros
         public VignetteParameters vignetteParameters => Parameters;
 
         public SceneTransitionProvider(VignetteParameters p)
@@ -59,8 +56,7 @@ public class GameManager : MonoBehaviour
             instance = this;
         }
 
-        // << CAMBIO CRÍTICO: Inicialización del Proveedor >>
-        // Creamos los parámetros para el fundido a negro total (ApertureSize = 0.0f)
+        // Inicialización del Proveedor
         _transitionVignetteParameters = new VignetteParameters
         {
             apertureSize = 0.0f,
@@ -68,6 +64,17 @@ public class GameManager : MonoBehaviour
             easeOutTime = VignetteFadeDuration,
         };
         _sceneTransitionProvider = new SceneTransitionProvider(_transitionVignetteParameters);
+
+        // CORRECCIÓN CS0618: Usar FindAnyObjectByType para buscar el UIManager
+        if (uiManager == null)
+        {
+            // Usamos FindAnyObjectByType<T>() para reemplazar FindObjectOfType<T>()
+            uiManager = FindAnyObjectByType<UIManager>(); // <-- ¡CORRECCIÓN AQUÍ!
+            if (uiManager == null)
+            {
+                Debug.LogError("UIManager no encontrado en la escena. Asigna la referencia en el Inspector.");
+            }
+        }
     }
 
     // Suscripción a eventos de escena
@@ -88,36 +95,21 @@ public class GameManager : MonoBehaviour
     {
         if (_vignetteController != null && _sceneTransitionProvider != null)
         {
-            // << CAMBIO CRÍTICO: Usamos EndTunnelingVignette para iniciar el fundido de salida >>
-            // Al llamar End, el controlador sabe que el efecto ya no es necesario e inicia el Ease Out.
             _vignetteController.EndTunnelingVignette(_sceneTransitionProvider);
             Debug.Log("GameManager: Viñeta abierta (Fade Out) después de cargar la escena.");
         }
     }
 
-    // --- FUNCIONES LLAMADAS POR LOS BOTONES DEL CUADERNO ---
-
-    private void HideNotebookAndLoadScene(int sceneIndex)
-    {
-        // 1. Esconde la UI del cuaderno si está activa.
-        if (notebookController != null && notebookController.IsActive())
-        {
-            notebookController.ToggleNotebook();
-        }
-
-        // 2. Inicia la transición segura.
-        StartCoroutine(TransitionToScene(sceneIndex));
-    }
+    // --- FUNCIONES LLAMADAS POR EL UIManager O LA LÓGICA DEL JUEGO ---
 
     /// <summary>
-    /// Coroutine que maneja el fundido a negro y la carga de escena.
+    /// Coroutine que maneja el fundido a negro y la carga de escena de forma segura.
     /// </summary>
-    private IEnumerator TransitionToScene(int sceneIndex)
+    public IEnumerator TransitionToScene(int sceneIndex)
     {
         if (_vignetteController != null && _sceneTransitionProvider != null)
         {
-            // 1. FUNDIDO A NEGRO (Fade-In): Inicia el efecto con nuestro proveedor.
-            // El controlador usa el 'easeInTime' de nuestros _transitionVignetteParameters (VignetteFadeDuration).
+            // 1. FUNDIDO A NEGRO (Fade-In)
             _vignetteController.BeginTunnelingVignette(_sceneTransitionProvider);
 
             // Espera a que el fundido a negro termine.
@@ -135,17 +127,18 @@ public class GameManager : MonoBehaviour
 
 
     /// <summary>
-    /// Reinicia el nivel actual.
+    /// Reinicia el nivel actual (llamado por el UIManager).
     /// </summary>
     public void RestartLevel()
     {
         Debug.Log("GameManager: Reiniciando nivel...");
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        HideNotebookAndLoadScene(currentSceneIndex);
+
+        StartCoroutine(TransitionToScene(currentSceneIndex));
     }
 
     /// <summary>
-    /// Carga la siguiente escena.
+    /// Carga la siguiente escena (llamado por el UIManager).
     /// </summary>
     public void NextLevel()
     {
@@ -155,12 +148,12 @@ public class GameManager : MonoBehaviour
         if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
         {
             Debug.Log("GameManager: Cargando el siguiente nivel (Index: " + nextSceneIndex + ")");
-            HideNotebookAndLoadScene(nextSceneIndex);
+            StartCoroutine(TransitionToScene(nextSceneIndex));
         }
         else
         {
             Debug.LogWarning("GameManager: No hay más niveles. Cargando menú principal.");
-            HideNotebookAndLoadScene(MainMenuSceneIndex);
+            StartCoroutine(TransitionToScene(MainMenuSceneIndex));
         }
     }
 
@@ -177,23 +170,29 @@ public class GameManager : MonoBehaviour
 #endif
     }
 
-    // --- FUNCIONES LLAMADAS POR LA LÓGICA DEL JUEGO ---
+    // --- EVENTOS DE JUEGO ---
 
+    /// <summary>
+    /// Función llamada por la lógica del juego al completar los objetivos.
+    /// </summary>
     public void OnMissionComplete()
     {
         Debug.Log("GameManager: Misión Wooble completada. Mostrando UI de fin de nivel.");
-        if (notebookController != null)
+
+        if (uiManager != null)
         {
-            notebookController.ShowEndLevelUI();
+            // Inicia la secuencia de fin de nivel en el UIManager.
+            uiManager.StartEndLevelSequence();
+        }
+        else
+        {
+            Debug.LogError("GameManager: No se pudo iniciar la secuencia de fin de nivel. UIManager es null.");
         }
     }
 
     public void NotifyWoobleEscaped()
     {
-        // Nota: Asumiendo que WatchNotifier.Instance tiene una instancia válida
-        if (WatchNotifier.Instance != null)
-        {
-            WatchNotifier.Instance.DisplayAlarm("ALERTA: Wooble Escapado!");
-        }
+        // ... (Tu lógica de notificación)
+        Debug.Log("ALERTA: Wooble Escapado! (Notificación Simulada)");
     }
 }

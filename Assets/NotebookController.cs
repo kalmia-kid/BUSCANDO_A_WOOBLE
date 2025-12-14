@@ -1,11 +1,11 @@
 using UnityEngine;
 using System.Collections;
-using System; // Necesario para System.Action
+using System;
 
 public class NotebookController : MonoBehaviour
 {
     // -------------------------------------------------------------------
-    // AÑADIDO: Implementación de Singleton para fácil acceso
+    // Implementación de Singleton para fácil acceso
     // -------------------------------------------------------------------
     public static NotebookController Instance { get; private set; }
 
@@ -14,6 +14,7 @@ public class NotebookController : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            // No usar DontDestroyOnLoad a menos que sea un Singleton de juego completo
         }
         else
         {
@@ -32,13 +33,15 @@ public class NotebookController : MonoBehaviour
     [Tooltip("Tiempo que tarda la animación de deslizamiento (en segundos).")]
     public float animationDuration = 0.3f;
 
-    [Header("UI y Botones")]
-    [Tooltip("El GameObject que contiene los botones y el texto de Fin de Nivel.")]
-    public GameObject endLevelUIPanel;
+    // NOTA: Se eliminan las referencias a missionStartUIPanel y endLevelUIPanel 
+    // porque el UIManager ahora maneja su visibilidad.
 
     private bool isNotebookActive = false;
     private Coroutine activeAnimation;
-    private bool uiIsPending = false; // Bandera para saber si la UI debe activarse
+
+    // Nueva bandera: Indica si se debe notificar al UIManager para que muestre el panel 
+    // de fin de nivel una vez que la animación de apertura termine.
+    private bool pendingEndLevelUI = false;
 
     // --- MÉTODOS ESTÁNDAR DE UNITY ---
 
@@ -47,14 +50,9 @@ public class NotebookController : MonoBehaviour
         // 1. Posicionar en el Holster y desactivar al inicio.
         transform.position = holsterPoint.position;
         transform.rotation = holsterPoint.rotation;
-        // Se mantiene activo si ya está en la escena, pero se mueve.
-        // gameObject.SetActive(false); // <--- Lo activará ToggleNotebook si es necesario
+        gameObject.SetActive(false); // Asegurarse de que el objeto físico esté oculto.
 
-        // 2. Asegurarse de que el panel de UI de fin de nivel esté escondido al inicio.
-        if (endLevelUIPanel != null)
-        {
-            endLevelUIPanel.SetActive(false);
-        }
+        // NOTA: La lógica de esconder los paneles de UI se movió al UIManager.Start()
     }
 
     // --- LÓGICA DE APARICIÓN/DESAPARICIÓN ---
@@ -64,6 +62,9 @@ public class NotebookController : MonoBehaviour
         return isNotebookActive;
     }
 
+    /// <summary>
+    /// Alterna la visibilidad del objeto físico del portafolio, gestionando la animación.
+    /// </summary>
     public void ToggleNotebook()
     {
         if (activeAnimation != null)
@@ -79,10 +80,18 @@ public class NotebookController : MonoBehaviour
             gameObject.SetActive(true);
             activeAnimation = StartCoroutine(AnimateMovement(holsterPoint, gripPoint, () =>
             {
-                // CALLBACK: Después de desplegarse, verifica si la UI de fin de nivel está pendiente
-                if (uiIsPending)
+                // CALLBACK: Después de desplegarse, notifica al UIManager si hay una UI pendiente
+                if (pendingEndLevelUI)
                 {
-                    ActivateEndLevelUI();
+                    // Llama al UIManager (asumiendo que tiene un Singleton o una referencia estática)
+                    // para mostrar el panel que estaba esperando la animación.
+                    // Aquí NO hacemos la activación, solo notificamos.
+                    // El UIManager se encargará de hacer EndLevelUIPanel.SetActive(true) y ocultar otros paneles.
+                    if (UIManager.Instance != null)
+                    {
+                        UIManager.Instance.ActivateEndLevelUIPanel();
+                    }
+                    pendingEndLevelUI = false; // La notificación ya ha sido enviada
                 }
             }));
             Debug.Log("NotebookController: Cuaderno desplegado.");
@@ -90,14 +99,13 @@ public class NotebookController : MonoBehaviour
         else
         {
             // Guardar:
-            // Asegúrate de desactivar la bandera de UI pendiente si el jugador lo cierra
-            uiIsPending = false;
 
-            // Esconde la UI de Fin de Nivel inmediatamente si está visible.
-            if (endLevelUIPanel != null)
-            {
-                endLevelUIPanel.SetActive(false);
-            }
+            // NO TOCAMOS NINGÚN PANEL DE UI AQUÍ.
+            // La ocultación de todos los paneles (si es necesario) debe ser llamada
+            // antes de ToggleNotebook() por la función que inicia el guardado (ej: HideAllUIAndResumeGame).
+
+            pendingEndLevelUI = false; // Cancelamos cualquier UI pendiente.
+
             // Inicia la animación de guardado, y desactiva el objeto al completarse.
             activeAnimation = StartCoroutine(AnimateMovement(gripPoint, holsterPoint, () =>
             {
@@ -130,43 +138,67 @@ public class NotebookController : MonoBehaviour
         transform.position = endPoint.position;
         transform.rotation = endPoint.rotation;
 
-        // Ejecuta la función de completado (si existe)
         onComplete?.Invoke();
 
         activeAnimation = null;
     }
 
-    // --- FUNCIÓN DE FIN DE NIVEL (LÓGICA CENTRAL) ---
+    // --- FUNCIONES DE INTERFAZ PARA EL FLUJO DE JUEGO (llamadas desde el GameManager o UIManager) ---
 
-    private void ActivateEndLevelUI()
+    /// <summary>
+    /// Despliega el cuaderno y notifica al UIManager para mostrar el panel de Misión.
+    /// Llamada por el GameManager al inicio del nivel.
+    /// </summary>
+    public void DeployAndShowMissionUI()
     {
-        if (endLevelUIPanel != null)
+        // NOTA: El UIManager DEBE asegurarse de que el panel de Misión esté visible 
+        // antes o justo después de llamar a esta función.
+
+        if (!isNotebookActive)
         {
-            endLevelUIPanel.SetActive(true);
-            uiIsPending = false; // La UI ya no está pendiente
-            Debug.Log("NotebookController: UI de opciones de fin de nivel ACTIVADA.");
-            // Opcional: Time.timeScale = 0f; si quieres pausar el juego
+            // Despliega el cuaderno (ToggleNotebook se encarga de la animación de apertura).
+            ToggleNotebook();
         }
+
+        Debug.Log("NotebookController: Solicitud de despliegue para UI de Misión.");
     }
 
     /// <summary>
-    /// Muestra el cuaderno y el panel de opciones de fin de nivel.
-    /// Llamada por el GameManager cuando Wooble es capturado definitivamente.
+    /// Guarda el cuaderno. Llamada por el botón 'Empezar Misión' en el MissionStart_Panel (a través del UIManager).
     /// </summary>
-    public void ShowEndLevelUI()
+    public void HideNotebook()
     {
-        if (endLevelUIPanel.activeSelf) return; // Ya está mostrando la UI
-
-        // 1. Si el cuaderno ya está activo, muestra la UI inmediatamente.
         if (isNotebookActive)
         {
-            ActivateEndLevelUI();
+            ToggleNotebook();
+        }
+        Debug.Log("NotebookController: Cuaderno escondido.");
+    }
+
+
+    /// <summary>
+    /// Prepara el cuaderno para mostrar el panel de opciones de fin de nivel.
+    /// Llamada por el GameManager cuando el nivel ha terminado.
+    /// </summary>
+    public void DeployAndShowEndLevelUI()
+    {
+        // Evita doble activación
+        if (pendingEndLevelUI) return;
+
+        // Si el cuaderno ya está activo, la UI puede aparecer inmediatamente.
+        if (isNotebookActive)
+        {
+            if (UIManager.Instance != null)
+            {
+                UIManager.Instance.ActivateEndLevelUIPanel();
+            }
         }
         else
         {
-            // 2. Si el cuaderno está guardado, marca la bandera y usa ToggleNotebook()
-            uiIsPending = true;
-            gameObject.SetActive(true); // Asegura que el objeto esté activo para que Toggle pueda animar
+            // Si el cuaderno está guardado, marca la bandera y usa ToggleNotebook().
+            // El callback de ToggleNotebook() llamará a UIManager.Instance.ActivateEndLevelUIPanel().
+            pendingEndLevelUI = true;
+            gameObject.SetActive(true);
             ToggleNotebook();
         }
     }
