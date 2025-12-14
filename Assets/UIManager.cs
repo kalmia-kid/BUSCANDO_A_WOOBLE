@@ -41,6 +41,13 @@ public class UIManager : MonoBehaviour
     [Tooltip("Botón de Reinicio en el Panel de Inicio de Misión (o Pausa).")]
     public Button Button_RestartLevel_Start;
 
+    // ¡NUEVAS REFERENCIAS AÑADIDAS!
+    [Tooltip("Botón para Salir del Juego en la UI de Fin de Nivel.")]
+    public Button Button_QuitGame_End;
+
+    [Tooltip("Botón para Salir del Juego en la UI de Inicio/Pausa de Misión.")]
+    public Button Button_QuitGame_Start;
+
     // ------------------------------------------------------------------
 
     void Start()
@@ -60,18 +67,32 @@ public class UIManager : MonoBehaviour
             Button_NextLevel.onClick.AddListener(OnNextLevelButtonPressed);
         }
 
-        // Botón Reinicio (Panel de Fin de Nivel)
+        // Botones de Reinicio
         if (Button_RestartLevel_End != null)
         {
             Button_RestartLevel_End.onClick.RemoveAllListeners();
             Button_RestartLevel_End.onClick.AddListener(OnRestartLevelButtonPressed);
         }
 
-        // Botón Reinicio (Panel de Inicio/Pausa)
         if (Button_RestartLevel_Start != null)
         {
             Button_RestartLevel_Start.onClick.RemoveAllListeners();
             Button_RestartLevel_Start.onClick.AddListener(OnRestartLevelButtonPressed);
+        }
+
+        // ¡LISTENERS AÑADIDOS! Botones para Salir del Juego
+        if (Button_QuitGame_End != null)
+        {
+            Button_QuitGame_End.onClick.RemoveAllListeners();
+            Button_QuitGame_End.onClick.AddListener(OnQuitGameButtonPressed); // Llama a la misma función
+            Debug.Log("UIManager: Listener de Salir (Fin de Nivel) reasignado.");
+        }
+
+        if (Button_QuitGame_Start != null)
+        {
+            Button_QuitGame_Start.onClick.RemoveAllListeners();
+            Button_QuitGame_Start.onClick.AddListener(OnQuitGameButtonPressed); // Llama a la misma función
+            Debug.Log("UIManager: Listener de Salir (Inicio/Pausa) reasignado.");
         }
 
         // 3. Verificación
@@ -82,12 +103,9 @@ public class UIManager : MonoBehaviour
     }
 
     // =================================================================
-    // >>> LÓGICA DE INICIO Y FIN DE MISIÓN <<<
+    // >>> LÓGICA DE UI Y ANIMACIÓN <<<
     // =================================================================
 
-    /// <summary>
-    /// Despliega el cuaderno y muestra el panel de inicio (Llamado por GameManager).
-    /// </summary>
     public void ShowMissionUIAndDeployNotebook()
     {
         if (MissionStartUIPanel != null)
@@ -101,10 +119,6 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Se llama desde el GameManager al finalizar el nivel. 
-    /// Delega la animación al NotebookController.
-    /// </summary>
     public void StartEndLevelSequence()
     {
         if (NotebookController != null)
@@ -120,17 +134,14 @@ public class UIManager : MonoBehaviour
 
     /// <summary>
     /// Llamado por el NotebookController después de que la animación de apertura ha terminado.
-    /// **(Esta es la función que NotebookController necesita)**
     /// </summary>
     public void ActivateEndLevelUIPanel()
     {
-        // 1. Ocultar el panel de misión (si estuviera activo)
         if (MissionStartUIPanel != null)
         {
             MissionStartUIPanel.SetActive(false);
         }
 
-        // 2. Mostrar el panel de fin de nivel
         if (EndLevelUIPanel != null)
         {
             EndLevelUIPanel.SetActive(true);
@@ -145,9 +156,6 @@ public class UIManager : MonoBehaviour
     // >>> FUNCIONES DE BOTÓN <<<
     // =================================================================
 
-    /// <summary>
-    /// Se llama al presionar el Button_NextLevel. Delega la transición al GameManager.
-    /// </summary>
     private void OnNextLevelButtonPressed()
     {
         if (EndLevelUIPanel != null)
@@ -166,12 +174,8 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Delega el reinicio al GameManager. Esta función es llamada por AMBOS botones de reinicio.
-    /// </summary>
     private void OnRestartLevelButtonPressed()
     {
-        // Ocultamos AMBOS paneles antes de la transición para evitar errores visuales
         if (EndLevelUIPanel != null)
         {
             EndLevelUIPanel.SetActive(false);
@@ -189,6 +193,22 @@ public class UIManager : MonoBehaviour
         else
         {
             Debug.LogError("UIManager: No se encontró una instancia de GameManager. El reinicio falló.");
+        }
+    }
+
+    /// <summary>
+    /// Delega la acción de salir al GameManager. Llamada por AMBOS botones de salir.
+    /// </summary>
+    private void OnQuitGameButtonPressed()
+    {
+        if (GameManager.Instance != null)
+        {
+            Debug.Log("UIManager: Botón Salir presionado. Llamando a GameManager.QuitGame().");
+            GameManager.Instance.QuitGame();
+        }
+        else
+        {
+            Debug.LogError("UIManager: No se encontró una instancia de GameManager para salir del juego.");
         }
     }
 }

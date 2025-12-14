@@ -1,40 +1,84 @@
 using UnityEngine;
 using System.Collections;
-// Añadido para simplificar la referencia a XRGrabInteractable
-
+using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class CaptureDevice : MonoBehaviour
 {
     [Header("Efectos y Contención")]
-    [Tooltip("El GameObject que muestra el efecto visual de Wooble capturado (luz, destello, etc.).")]
     public GameObject containmentEffect;
-
-    [Tooltip("Tiempo que Wooble permanece anclado antes de desaparecer (simula la absorción).")]
+    public GameObject absorptionEffect;
     public float anchorTimeBeforeDisappearance = 0.5f;
+    public float absorptionEffectDuration = 0.1f;
+    public Collider captureCollider;
 
-    [Tooltip("El Collider de esta trampa. Debe estar marcado como Is Trigger.")]
-    public Collider captureCollider; // Es público, asumimos que se asigna en el Inspector
+    // Función auxiliar para forzar la reproducción de efectos
+    private void PlayEffect(GameObject effectObject)
+    {
+        if (effectObject == null) return;
 
-    // Eliminamos el Awake() ya que el Collider es público y se asigna externamente.
+        // 1. Activar el GameObject
+        effectObject.SetActive(true);
+
+        // 2. Forzar la reproducción de sistemas de partículas
+        // Es común que los sistemas de partículas no se reproduzcan con solo activar el objeto.
+        ParticleSystem ps = effectObject.GetComponent<ParticleSystem>();
+        if (ps != null && !ps.isPlaying)
+        {
+            ps.Play(true); // 'true' incluye los hijos
+        }
+
+        // 3. Forzar la reproducción de audio (si el efecto tiene sonido)
+        AudioSource audioSource = effectObject.GetComponent<AudioSource>();
+        if (audioSource != null && !audioSource.isPlaying)
+        {
+            audioSource.Play();
+        }
+
+        // 4. Forzar la reproducción de animaciones (si el efecto es una animación)
+        // Nota: Los Animators a menudo funcionan bien con SetActive, pero si falla, 
+        // podrías necesitar llamar a animator.Play("nombre_del_clip").
+    }
+
+    // Función auxiliar para detener/ocultar efectos
+    private void StopEffect(GameObject effectObject)
+    {
+        if (effectObject == null) return;
+
+        // Detener partículas
+        ParticleSystem ps = effectObject.GetComponent<ParticleSystem>();
+        if (ps != null)
+        {
+            ps.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+        }
+
+        // Detener audio
+        AudioSource audioSource = effectObject.GetComponent<AudioSource>();
+        if (audioSource != null)
+        {
+            audioSource.Stop();
+        }
+
+        effectObject.SetActive(false);
+    }
+
 
     void Start()
     {
-        if (containmentEffect != null)
-        {
-            containmentEffect.SetActive(false);
-        }
+        // Usamos la nueva función para asegurar que inician apagados.
+        StopEffect(containmentEffect);
+        StopEffect(absorptionEffect);
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        // ... (Lógica de OnTriggerEnter, se mantiene igual) ...
         if (other.CompareTag("Wooble"))
         {
             Wooble woobleToCapture = other.GetComponent<Wooble>();
 
             if (woobleToCapture != null && !woobleToCapture.IsCaptured)
             {
-                // Usamos la referencia simplificada
-                UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable grabInteractable = GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable>();
+                XRGrabInteractable grabInteractable = GetComponent<XRGrabInteractable>();
 
                 if (grabInteractable != null && grabInteractable.isSelected)
                 {
@@ -45,53 +89,54 @@ public class CaptureDevice : MonoBehaviour
     }
 
     /// <summary>
-    /// Secuencia principal de captura: Anclaje -> Efecto -> Desaparición -> Activación de UI.
+    /// Secuencia principal de captura con efectos sostenidos y finales.
     /// </summary>
     private IEnumerator CaptureSequence(Wooble wooble)
     {
         // 1. INICIO DE LA CAPTURA Y ESTADO
         wooble.StartCapture();
 
-        // Desactivamos el Collider de la trampa para evitar múltiples capturas
         if (captureCollider != null)
         {
             captureCollider.enabled = false;
         }
 
-        // ANCLAJE PRECISO: Wooble se convierte en hijo del dispositivo.
-        wooble.transform.SetParent(this.transform);
+        wooble.DisablePhysicsAndMovement();
 
-        // CORRECCIÓN CLAVE: Resetear la posición y rotación LOCAL para anclarse sin offset.
+        // 2. ACTIVAR EFECTO DE CONTENCIÓN Y ANCLAJE (SOSTENIDO)
+        wooble.transform.SetParent(this.transform);
         wooble.transform.localPosition = Vector3.zero;
         wooble.transform.localRotation = Quaternion.identity;
 
-        // 2. EFECTO VISUAL Y TIEMPO DE ESPERA
-        if (containmentEffect != null)
-        {
-            containmentEffect.SetActive(true);
-        }
+        // Activa y fuerza la reproducción del efecto de Contención Sostenido
+        PlayEffect(containmentEffect);
 
-        // Espera el tiempo de anclaje (muestra Wooble pegado a la trampa)
+        // Espera el tiempo de anclaje (Wooble se ve pegado y contenido)
         yield return new WaitForSeconds(anchorTimeBeforeDisappearance);
 
-        // 3. DESAPARICIÓN FINAL
+        // 3. EFECTO DE ABSORCIÓN FINAL Y DESAPARICIÓN
+
+        // 3a. Detener/Ocultar el efecto de Contención Sostenido
+        StopEffect(containmentEffect);
+
+        // 3b. Activar y forzar la reproducción del efecto Final de Absorción
+        PlayEffect(absorptionEffect);
+
+        // 3c. Desaparición de Wooble
         wooble.FinalizeDisappearance();
 
-        // Desactiva el efecto visual
-        if (containmentEffect != null)
-        {
-            containmentEffect.SetActive(false);
-        }
+        // 3d. Espera breve para el efecto Final
+        yield return new WaitForSeconds(absorptionEffectDuration);
+
+        // 3e. Desactivar el efecto Final
+        StopEffect(absorptionEffect);
 
         // 4. REACTIVACIÓN Y FIN DE MISIÓN
-
-        // Volvemos a habilitar el Collider de la trampa
         if (captureCollider != null)
         {
             captureCollider.enabled = true;
         }
 
-        // ¡LLAMADA CLAVE PARA LA UI! Llama a la función del GameManager para mostrar el menú de fin de nivel.
         if (GameManager.Instance != null)
         {
             GameManager.Instance.OnMissionComplete();
