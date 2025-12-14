@@ -12,11 +12,10 @@ public class GameManager : MonoBehaviour
 
     [Header("Referencias de Interacción")]
     public NotebookController notebookController;
-
     public UIManager uiManager;
 
     [Header("VR Sickness Mitigation")]
-    // [SerializeField] se mantiene para la asignación en el inspector, pero la re-adquirimos en runtime.
+    // Referencia que NO debe persistir entre escenas.
     [SerializeField]
     private TunnelingVignetteController _vignetteController;
 
@@ -38,10 +37,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
     void Awake()
     {
-        // Implementación del Singleton
+        // 1. Implementación del Singleton (persistencia)
         if (instance != null && instance != this)
         {
             Destroy(this.gameObject);
@@ -49,11 +47,10 @@ public class GameManager : MonoBehaviour
         else
         {
             instance = this;
-            // AÑADIDO: Asegura que el GameManager persiste entre escenas
             DontDestroyOnLoad(this.gameObject);
         }
 
-        // Inicialización del Proveedor (se mantiene igual)
+        // 2. Inicialización del Proveedor de Viñeta
         _transitionVignetteParameters = new VignetteParameters
         {
             apertureSize = 0.0f,
@@ -61,12 +58,6 @@ public class GameManager : MonoBehaviour
             easeOutTime = VignetteFadeDuration,
         };
         _sceneTransitionProvider = new SceneTransitionProvider(_transitionVignetteParameters);
-
-        // CORRECCIÓN CS0618: Usar FindAnyObjectByType para buscar el UIManager
-        if (uiManager == null)
-        {
-            uiManager = FindAnyObjectByType<UIManager>();
-        }
     }
 
     // Suscripción a eventos de escena
@@ -81,30 +72,39 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Se llama una vez que una escena ha sido cargada. Inicia el fundido de salida de la viñeta.
+    /// Se llama una vez que una escena ha sido cargada. Actualiza todas las referencias y realiza el Fade Out.
     /// </summary>
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // ********** CORRECCIÓN DEL FADE OUT **********
-        TunnelingVignetteController activeVignetteController = _vignetteController;
+        // ********** CORRECCIÓN CRÍTICA: RE-ADQUISICIÓN DE REFERENCIAS DE ESCENA **********
+        // Siempre buscamos la nueva instancia ya que el objeto anterior fue destruido.
 
-        // 1. Si la referencia original es nula (o apunta a un objeto destruido), busca el nuevo controlador en la escena.
-        if (activeVignetteController == null)
-        {
-            activeVignetteController = FindAnyObjectByType<TunnelingVignetteController>();
-        }
+        // 1. Re-adquirir el UIManager 
+        uiManager = FindAnyObjectByType<UIManager>();
+        if (uiManager != null) Debug.Log("GameManager: Nueva instancia de UIManager adquirida.");
+        else Debug.LogError("GameManager: UIManager NO ENCONTRADO en la escena " + scene.name);
+
+
+        // 2. Re-adquirir el NotebookController
+        notebookController = FindAnyObjectByType<NotebookController>();
+        if (notebookController != null) Debug.Log("GameManager: Nueva instancia de NotebookController adquirida.");
+
+
+        // ********** LÓGICA DE FADE OUT DE VIÑETA (CORRECCIÓN FINAL) **********
+
+        // La referencia _vignetteController (persistente) se usa como fallback, pero siempre intentamos buscar el objeto en la escena activa.
+        TunnelingVignetteController activeVignetteController = FindAnyObjectByType<TunnelingVignetteController>();
+
+        // Asignamos la referencia encontrada (si existe) al campo persistente.
+        _vignetteController = activeVignetteController;
 
         if (activeVignetteController != null && _sceneTransitionProvider != null)
         {
-            // 2. Ejecuta el fundido de salida en el controlador activo de la nueva escena.
+            // EndTunnelingVignette iniciará el fundido de apertura usando el easeOutTime definido (0.5s).
             activeVignetteController.EndTunnelingVignette(_sceneTransitionProvider);
 
-            // Opcional: Actualizar la referencia del GameManager al controlador de la nueva escena
-            _vignetteController = activeVignetteController;
-
-            Debug.Log("GameManager: Viñeta abierta (Fade Out) después de cargar la escena.");
+            Debug.Log($"GameManager: Fade Out de Viñeta iniciado en la escena {scene.name}. Duración: {VignetteFadeDuration}s.");
         }
-        // **********************************************
     }
 
     // --- FUNCIONES LLAMADAS POR EL UIManager O LA LÓGICA DEL JUEGO ---
@@ -114,10 +114,12 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public IEnumerator TransitionToScene(int sceneIndex)
     {
-        // El BeginTunnelingVignette siempre usa la referencia que tiene el GameManager
+        // 1. FUNDIDO A NEGRO (Fade-In)
         if (_vignetteController != null && _sceneTransitionProvider != null)
         {
-            // 1. FUNDIDO A NEGRO (Fade-In)
+            // Antes de la transición, invalidamos la referencia persistente para forzar la búsqueda en la nueva escena.
+            // Aunque EndTunnelingVignette hace esto de forma implicita, esto refuerza la lógica.
+
             _vignetteController.BeginTunnelingVignette(_sceneTransitionProvider);
 
             // Espera a que el fundido a negro termine.
@@ -125,7 +127,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            // Fallback
+            // Fallback (tiempo sin fundido)
             yield return new WaitForSeconds(0.2f);
         }
 
@@ -137,6 +139,7 @@ public class GameManager : MonoBehaviour
     public void RestartLevel()
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        // Reiniciamos el nivel de forma segura.
         StartCoroutine(TransitionToScene(currentSceneIndex));
     }
 
@@ -170,7 +173,13 @@ public class GameManager : MonoBehaviour
     {
         if (uiManager != null)
         {
+            Debug.Log("GameManager: Misión completada. Llamando a UIManager.StartEndLevelSequence().");
             uiManager.StartEndLevelSequence();
+        }
+        else
+        {
+            // Ahora este error debería ser raro si el UIManager está presente en la escena.
+            Debug.LogError("GameManager: uiManager es NULL. Verifica que el UIManager esté presente en la escena y en la capa correcta.");
         }
     }
 

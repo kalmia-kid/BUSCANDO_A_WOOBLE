@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Escena2PruebaAna.unity
     guid: b256dec62fb0fb347b26f99ee1bbb299
+  - enabled: 1
+    path: Assets/Scenes/Escena3PruebaAna.unity
+    guid: 2ac0c1b0460648245aeeffa1c7e122d3
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: bfa1182bd221b4ca89619141f66f1260, type: 2}
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: dc5a169419fa04987b057f65238cf3ba, type: 2}

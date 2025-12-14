@@ -5316,7 +5316,7 @@ MonoBehaviour:
   notebookController: {fileID: 500819827}
   uiManager: {fileID: 1259729620}
   _vignetteController: {fileID: 238903977}
-  VignetteFadeDuration: 0.5
+  VignetteFadeDuration: 1
 --- !u!4 &552729863
 Transform:
   m_ObjectHideFlags: 0
@@ -11993,8 +11993,9 @@ MonoBehaviour:
   NotebookController: {fileID: 500819827}
   MissionStartUIPanel: {fileID: 443552922}
   EndLevelUIPanel: {fileID: 1474828525}
-  Button_NextLevel: {fileID: 0}
-  Button_StartMission: {fileID: 0}
+  Button_NextLevel: {fileID: 1776594788}
+  Button_RestartLevel_End: {fileID: 1894236462}
+  Button_RestartLevel_Start: {fileID: 571926566}
 --- !u!4 &1259729621
 Transform:
   m_ObjectHideFlags: 0
@@ -12463,8 +12464,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 6.4075556, y: 6.4585867, z: 15.995834}
-  m_Center: {x: 0.010855739, y: 3.8117735, z: 1.4824224}
+  m_Size: {x: 6.4075556, y: 10.211397, z: 20.04679}
+  m_Center: {x: 0.010855739, y: 4.708349, z: -0.13081448}
 --- !u!114 &1321309913
 MonoBehaviour:
   m_ObjectHideFlags: 0
