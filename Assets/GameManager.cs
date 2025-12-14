@@ -1,23 +1,55 @@
 using UnityEngine;
-using UnityEngine.SceneManagement; // Necesario para cargar escenas
-using System.Collections; // Necesario para Corutinas (aunque no se usan directamente aquí, es buena práctica)
+using UnityEngine.SceneManagement;
+using System.Collections;
+using UnityEngine.XR.Interaction.Toolkit;
+// << AÃ‘ADIDO: NECESARIO para acceder a VignetteParameters y ITunnelingVignetteProvider >>
+using UnityEngine.XR.Interaction.Toolkit.Locomotion.Comfort;
 
 public class GameManager : MonoBehaviour
 {
-    // Patrón Singleton para acceder al GameManager fácilmente desde cualquier otro script (ej. GameManager.Instance.RestartLevel())
+    // PatrÃ³n Singleton
     private static GameManager instance;
     public static GameManager Instance { get { return instance; } }
 
-    [Header("Referencias de Interacción")]
-    [Tooltip("Arrastra aquí el objeto con el script NotebookController.")]
+    [Header("Referencias de InteracciÃ³n")]
+    [Tooltip("Arrastra aquÃ­ el objeto con el script NotebookController.")]
     public NotebookController notebookController;
 
-    // Índice de la escena del menú principal (0 es el índice común para el menú principal)
+    [Header("VR Sickness Mitigation")]
+    [Tooltip("Arrastra el componente TunnelingVignetteController del XR Rig/Camera.")]
+    [SerializeField]
+    private TunnelingVignetteController _vignetteController;
+
+    // << NUEVO CAMPO: TIEMPO DE FUNDIDO MANUAL >>
+    [Tooltip("El tiempo que tarda el fundido a negro (Ease In Time) y el fundido a abierto (Ease Out Time).")]
+    public float VignetteFadeDuration = 0.5f;
+
     private const int MainMenuSceneIndex = 0;
+
+    // << NUEVOS CAMPOS: Para implementar el Provider Pattern >>
+    private SceneTransitionProvider _sceneTransitionProvider;
+    private VignetteParameters _transitionVignetteParameters;
+
+
+    // << NUEVA CLASE: Implementa la interfaz ITunnelingVignetteProvider >>
+    // Esta clase nos permite llamar a Begin/EndTunnelingVignette
+    private class SceneTransitionProvider : ITunnelingVignetteProvider
+    {
+        public VignetteParameters Parameters;
+
+        // Propiedad requerida por la interfaz, que devuelve nuestros parÃ¡metros
+        public VignetteParameters vignetteParameters => Parameters;
+
+        public SceneTransitionProvider(VignetteParameters p)
+        {
+            Parameters = p;
+        }
+    }
+
 
     void Awake()
     {
-        // Implementación del Singleton
+        // ImplementaciÃ³n del Singleton
         if (instance != null && instance != this)
         {
             Destroy(this.gameObject);
@@ -25,44 +57,95 @@ public class GameManager : MonoBehaviour
         else
         {
             instance = this;
-            // Opcional: Si quieres que el GameManager persista entre escenas: DontDestroyOnLoad(this.gameObject);
+        }
+
+        // << CAMBIO CRÃTICO: InicializaciÃ³n del Proveedor >>
+        // Creamos los parÃ¡metros para el fundido a negro total (ApertureSize = 0.0f)
+        _transitionVignetteParameters = new VignetteParameters
+        {
+            apertureSize = 0.0f,
+            easeInTime = VignetteFadeDuration,
+            easeOutTime = VignetteFadeDuration,
+        };
+        _sceneTransitionProvider = new SceneTransitionProvider(_transitionVignetteParameters);
+    }
+
+    // SuscripciÃ³n a eventos de escena
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    /// <summary>
+    /// Se llama una vez que una escena ha sido cargada. Inicia el fundido de salida de la viÃ±eta.
+    /// </summary>
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (_vignetteController != null && _sceneTransitionProvider != null)
+        {
+            // << CAMBIO CRÃTICO: Usamos EndTunnelingVignette para iniciar el fundido de salida >>
+            // Al llamar End, el controlador sabe que el efecto ya no es necesario e inicia el Ease Out.
+            _vignetteController.EndTunnelingVignette(_sceneTransitionProvider);
+            Debug.Log("GameManager: ViÃ±eta abierta (Fade Out) despuÃ©s de cargar la escena.");
         }
     }
 
     // --- FUNCIONES LLAMADAS POR LOS BOTONES DEL CUADERNO ---
 
-    /// <summary>
-    /// Intenta esconder la UI del cuaderno y carga una escena.
-    /// Esto ayuda a limpiar la UI antes de la transición de escena.
-    /// </summary>
     private void HideNotebookAndLoadScene(int sceneIndex)
     {
-        // Esconde la UI del cuaderno (si está activo, esto inicia la animación de guardado)
+        // 1. Esconde la UI del cuaderno si estÃ¡ activa.
         if (notebookController != null && notebookController.IsActive())
         {
             notebookController.ToggleNotebook();
         }
 
-        // Carga la escena inmediatamente
+        // 2. Inicia la transiciÃ³n segura.
+        StartCoroutine(TransitionToScene(sceneIndex));
+    }
+
+    /// <summary>
+    /// Coroutine que maneja el fundido a negro y la carga de escena.
+    /// </summary>
+    private IEnumerator TransitionToScene(int sceneIndex)
+    {
+        if (_vignetteController != null && _sceneTransitionProvider != null)
+        {
+            // 1. FUNDIDO A NEGRO (Fade-In): Inicia el efecto con nuestro proveedor.
+            // El controlador usa el 'easeInTime' de nuestros _transitionVignetteParameters (VignetteFadeDuration).
+            _vignetteController.BeginTunnelingVignette(_sceneTransitionProvider);
+
+            // Espera a que el fundido a negro termine.
+            yield return new WaitForSeconds(VignetteFadeDuration);
+        }
+        else
+        {
+            // Fallback si no hay viÃ±eta.
+            yield return new WaitForSeconds(0.2f);
+        }
+
+        // 2. Carga la escena *despuÃ©s* de que la viÃ±eta estÃ© completamente cerrada.
         SceneManager.LoadScene(sceneIndex);
     }
 
 
     /// <summary>
     /// Reinicia el nivel actual.
-    /// Esta función se conecta al botón "Reiniciar" del cuaderno.
     /// </summary>
     public void RestartLevel()
     {
         Debug.Log("GameManager: Reiniciando nivel...");
-
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         HideNotebookAndLoadScene(currentSceneIndex);
     }
 
     /// <summary>
-    /// Carga la siguiente escena en el orden de Build Settings.
-    /// Esta función se conecta al botón "Siguiente Nivel" del cuaderno.
+    /// Carga la siguiente escena.
     /// </summary>
     public void NextLevel()
     {
@@ -76,51 +159,38 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("GameManager: No hay más niveles. Cargando menú principal.");
-            // Si no hay más niveles, vuelve al menú principal.
+            Debug.LogWarning("GameManager: No hay mÃ¡s niveles. Cargando menÃº principal.");
             HideNotebookAndLoadScene(MainMenuSceneIndex);
         }
     }
 
     /// <summary>
-    /// Sale de la aplicación.
-    /// Esta función se conecta al botón "Salir" del cuaderno.
+    /// Sale de la aplicaciÃ³n.
     /// </summary>
     public void QuitGame()
     {
-        Debug.Log("GameManager: Cerrando la aplicación...");
+        Debug.Log("GameManager: Cerrando la aplicaciÃ³n...");
         Application.Quit();
 
-        // Nota: Application.Quit() solo funciona en builds. 
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
     }
 
-    // --- FUNCIONES LLAMADAS POR LA LÓGICA DEL JUEGO ---
+    // --- FUNCIONES LLAMADAS POR LA LÃ“GICA DEL JUEGO ---
 
-    /// <summary>
-    /// Función que se llama cuando Wooble es atrapado y la misión se completa.
-    /// Inicia la secuencia de Fin de Nivel en la UI del cuaderno.
-    /// </summary>
     public void OnMissionComplete()
     {
-        Debug.Log("GameManager: Misión Wooble completada. Mostrando UI de fin de nivel.");
-
-        // 1. Mostrar el cuaderno (el cuaderno manejará la lógica de abrirse y mostrar la UI después de la animación)
+        Debug.Log("GameManager: MisiÃ³n Wooble completada. Mostrando UI de fin de nivel.");
         if (notebookController != null)
         {
             notebookController.ShowEndLevelUI();
         }
-
-        // 2. Aquí iría la lógica para detener el tiempo, pausar el input principal, etc.
-        // Time.timeScale = 0f; // Si deseas pausar completamente el juego.
     }
 
-    // Puedes añadir una función para la alarma del reloj aquí:
     public void NotifyWoobleEscaped()
     {
-        // Asegúrate de que la instancia del notificador exista antes de llamar
+        // Nota: Asumiendo que WatchNotifier.Instance tiene una instancia vÃ¡lida
         if (WatchNotifier.Instance != null)
         {
             WatchNotifier.Instance.DisplayAlarm("ALERTA: Wooble Escapado!");
