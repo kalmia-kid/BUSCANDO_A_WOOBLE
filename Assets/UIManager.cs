@@ -1,11 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
+// NOTA: Se necesita SceneManagement para GetActiveScene().buildIndex
 using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
     // -------------------------------------------------------------------
-    // AÑADIDO: Implementación de Singleton para fácil acceso
+    // Implementación de Singleton
     // -------------------------------------------------------------------
     public static UIManager Instance { get; private set; }
 
@@ -26,36 +27,37 @@ public class UIManager : MonoBehaviour
     // --- Referencias Públicas (Asignar en el Inspector de Unity) ---
 
     [Header("Componentes")]
-    [Tooltip("Referencia al script que controla la animación del objeto 3D.")]
-    public NotebookController NotebookController; // AÑADIDO
+    public NotebookController NotebookController;
 
     [Header("Paneles de UI")]
-    public GameObject MissionStartUIPanel; // El panel de la misión/portafolio
-    public GameObject EndLevelUIPanel;     // El panel de fin de nivel
+    public GameObject MissionStartUIPanel;
+    public GameObject EndLevelUIPanel;
 
     [Header("Botones")]
-    public Button Button_NextLevel;        // El botón para avanzar de nivel
-
-    // AÑADIDO: Botón para iniciar la misión y cerrar el portafolio
+    public Button Button_NextLevel;
     public Button Button_StartMission;
+    // Si tienes un botón de reinicio en el panel de fin de nivel, añádelo aquí.
+    // public Button Button_RestartLevel; 
 
     // ------------------------------------------------------------------
 
     void Start()
     {
         // 1. Inicialización: Aseguramos el estado inicial de los paneles
-        EndLevelUIPanel.SetActive(false);
-
-        // El MissionStartUIPanel debe estar en el estado que se desea al inicio del nivel (ej: activo para que se vea el inicio).
-        // MissionStartUIPanel.SetActive(true); 
+        if (EndLevelUIPanel != null)
+        {
+            EndLevelUIPanel.SetActive(false);
+        }
 
         // 2. Asignación de Listeners
         if (Button_NextLevel != null)
         {
-            Button_NextLevel.onClick.AddListener(CargarSiguienteNivel);
+            // CORRECCIÓN: Usamos el nuevo nombre de función y delegamos a GameManager
+            Button_NextLevel.onClick.AddListener(OnNextLevelButtonPressed);
         }
-        if (Button_StartMission != null) // AÑADIDO: Lógica para el botón de iniciar misión
+        if (Button_StartMission != null)
         {
+            // CORRECCIÓN: Attach listener a la función pública definida abajo.
             Button_StartMission.onClick.AddListener(HideMissionUIAndNotebook);
         }
 
@@ -67,31 +69,14 @@ public class UIManager : MonoBehaviour
     }
 
     // =================================================================
-    // >>> LÓGICA DE INICIO Y CIERRE DE MISIÓN (NUEVAS FUNCIONES) <<<
+    // >>> LÓGICA DE INICIO Y CIERRE DE MISIÓN <<<
     // =================================================================
 
-    /// <summary>
-    /// Llamado desde el UIManager.Start() o desde el GameManager al inicio.
-    /// Despliega el cuaderno y muestra el panel de inicio.
-    /// </summary>
-    public void ShowMissionUIAndDeployNotebook()
-    {
-        if (MissionStartUIPanel != null)
-        {
-            MissionStartUIPanel.SetActive(true); // Mostrar el panel de misión
-        }
-
-        // Pide al NotebookController que haga la animación de apertura
-        if (NotebookController != null)
-        {
-            NotebookController.DeployAndShowMissionUI();
-        }
-    }
-
+    // Función que faltaba o estaba mal definida.
     /// <summary>
     /// Llamado por el Button_StartMission. Oculta el panel de UI y el objeto 3D.
     /// </summary>
-    public void HideMissionUIAndNotebook()
+    public void HideMissionUIAndNotebook() // <--- ¡DEBE SER PÚBLICA!
     {
         // 1. Ocultar el panel de UI inmediatamente
         if (MissionStartUIPanel != null)
@@ -104,12 +89,12 @@ public class UIManager : MonoBehaviour
         {
             NotebookController.HideNotebook();
         }
-
-        // Opcional: GameManager.Instance.ResumeGame(); o similar
     }
 
+    // ... (ShowMissionUIAndDeployNotebook, si la usas, también debe estar aquí) ...
+
     // =================================================================
-    // >>> LÓGICA DE FIN DE NIVEL (MODIFICADA) <<<
+    // >>> LÓGICA DE FIN DE NIVEL <<<
     // =================================================================
 
     /// <summary>
@@ -120,23 +105,22 @@ public class UIManager : MonoBehaviour
     {
         if (NotebookController != null)
         {
-            // El NotebookController se encargará de hacer la animación de apertura
-            // y luego llamará a ActivateEndLevelUIPanel()
             NotebookController.DeployAndShowEndLevelUI();
         }
         else
         {
-            Debug.LogError("ERROR: NotebookController no está asignado.");
+            Debug.LogError("ERROR: NotebookController no está asignado. Activando UI directamente.");
+            // Fallback
+            ActivateEndLevelUIPanel();
         }
     }
 
     /// <summary>
     /// Llamado por el NotebookController después de que la animación de apertura ha terminado.
-    /// Cumple el requisito: MissionStartUIPanel se oculta cuando aparece EndLevelUIPanel.
     /// </summary>
-    public void ActivateEndLevelUIPanel() // NUEVA FUNCIÓN PÚBLICA DE CALLBACK
+    public void ActivateEndLevelUIPanel()
     {
-        // 1. Ocultar el panel de misión/portafolio
+        // 1. Ocultar el panel de misión/portafolio (si estuviera activo)
         if (MissionStartUIPanel != null)
         {
             MissionStartUIPanel.SetActive(false);
@@ -147,17 +131,20 @@ public class UIManager : MonoBehaviour
         {
             EndLevelUIPanel.SetActive(true);
         }
+        else
+        {
+            Debug.LogError("UIManager: EndLevelUIPanel es nulo. Asigna la referencia.");
+        }
     }
 
     // =================================================================
-    // >>> FUNCIÓN DE BOTÓN (SIN CAMBIOS) <<<
+    // >>> FUNCIÓN DE BOTÓN CORREGIDA PARA USAR EL GAMEMANAGER (CON VIÑETA) <<<
     // =================================================================
 
     /// <summary>
-    /// Se llama automáticamente al presionar el Button_NextLevel.
-    /// Cumple el requisito: EndLevelUIPanel solo desaparece al presionar el botón.
+    /// Se llama al presionar el Button_NextLevel. Oculta la UI y llama al GameManager para la transición segura.
     /// </summary>
-    private void CargarSiguienteNivel()
+    private void OnNextLevelButtonPressed()
     {
         if (EndLevelUIPanel != null)
         {
@@ -165,17 +152,14 @@ public class UIManager : MonoBehaviour
             EndLevelUIPanel.SetActive(false);
         }
 
-        // 2. Lógica para avanzar de escena
-        int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
-
-        if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
+        // 2. Delegar la transición segura (con viñeta) al GameManager.
+        if (GameManager.Instance != null)
         {
-            SceneManager.LoadScene(nextSceneIndex);
+            GameManager.Instance.NextLevel();
         }
         else
         {
-            Debug.LogWarning("¡Fin del juego! No hay más escenas en Build Settings.");
-            // Opcional: Volver al menú principal, etc.
+            Debug.LogError("UIManager: No se encontró una instancia de GameManager. La transición segura de escena falló.");
         }
     }
 }
