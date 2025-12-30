@@ -74,10 +74,63 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 26b456e23af9dbd48ae4a3c6b5f9abca, type: 3}
       propertyPath: m_Name
-      value: MOD_TuberiaMediana_n1
+      value: PF_TuberiaMediana_n1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4908480745251508790, guid: 26b456e23af9dbd48ae4a3c6b5f9abca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6208213951736134012}
+    - targetCorrespondingSourceObject: {fileID: 4908480745251508790, guid: 26b456e23af9dbd48ae4a3c6b5f9abca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 320210052222429670}
   m_SourcePrefab: {fileID: 100100000, guid: 26b456e23af9dbd48ae4a3c6b5f9abca, type: 3}
+--- !u!1 &7394984106302330456 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4908480745251508790, guid: 26b456e23af9dbd48ae4a3c6b5f9abca, type: 3}
+  m_PrefabInstance: {fileID: 2503491107757802606}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &6208213951736134012
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7394984106302330456}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.08001831, y: 1.2054037, z: 0.27711684}
+  m_Center: {x: -0.00000002353682, y: -0.23423664, z: 0.12827241}
+--- !u!65 &320210052222429670
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7394984106302330456}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.08001831, y: 0.6751534, z: 0.24336907}
+  m_Center: {x: -0.00000002353682, y: 0.4993615, z: -0.14514656}
