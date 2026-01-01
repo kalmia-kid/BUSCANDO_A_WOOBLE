@@ -1299,7 +1299,7 @@
                 {
                     "name": "",
                     "id": "a314747d-b183-4eab-a183-c33bdef82952",
-                    "path": "<OculusTouchController>/secondaryButton",
+                    "path": "<OculusTouchController>{LeftHand}/secondaryButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
