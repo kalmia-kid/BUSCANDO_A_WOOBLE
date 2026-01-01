@@ -64,6 +64,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PF_n0_cajacarton1
       objectReference: {fileID: 0}
+    - target: {fileID: 5790012315435199248, guid: d1e50f26250bf034687d373874a4ddc7, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: be8c440ffe130884fab8330f12687c8f, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
