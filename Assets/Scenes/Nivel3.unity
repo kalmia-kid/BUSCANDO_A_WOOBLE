@@ -4966,7 +4966,7 @@ GameObject:
   - component: {fileID: 610112022}
   - component: {fileID: 610112023}
   - component: {fileID: 610112024}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: HolsterPoint_Bag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6238,275 +6238,6 @@ MonoBehaviour:
   m_Image: {fileID: 2018379307}
   m_CanvasGroup: {fileID: 0}
   m_IgnoreAlpha: 0
---- !u!1 &725450226
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 725450231}
-  - component: {fileID: 725450230}
-  - component: {fileID: 725450229}
-  - component: {fileID: 725450228}
-  - component: {fileID: 725450227}
-  - component: {fileID: 725450233}
-  - component: {fileID: 725450232}
-  m_Layer: 0
-  m_Name: CuboTonto
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &725450227
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 725450226}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a35f6cfbfba9b548aaa00d52cfe8a50, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.XR.Interaction.Toolkit::UnityEngine.XR.Interaction.Toolkit.Interactables.XRSimpleInteractable
-  m_InteractionManager: {fileID: 0}
-  m_Colliders:
-  - {fileID: 725450228}
-  m_InteractionLayers:
-    m_Bits: 1
-  m_DistanceCalculationMode: 1
-  m_SelectMode: 0
-  m_FocusMode: 1
-  m_CustomReticle: {fileID: 0}
-  m_AllowGazeInteraction: 0
-  m_AllowGazeSelect: 0
-  m_OverrideGazeTimeToSelect: 0
-  m_GazeTimeToSelect: 0.5
-  m_OverrideTimeToAutoDeselectGaze: 0
-  m_TimeToAutoDeselectGaze: 3
-  m_AllowGazeAssistance: 0
-  m_FirstHoverEntered:
-    m_PersistentCalls:
-      m_Calls: []
-  m_LastHoverExited:
-    m_PersistentCalls:
-      m_Calls: []
-  m_HoverEntered:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 725450232}
-        m_TargetAssemblyTypeName: VRButtonVisual, Assembly-CSharp
-        m_MethodName: OnDown
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 4461374879045231283}
-        m_TargetAssemblyTypeName: SlidingDoor, Assembly-CSharp
-        m_MethodName: ToggleDoor
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  m_HoverExited:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 725450232}
-        m_TargetAssemblyTypeName: VRButtonVisual, Assembly-CSharp
-        m_MethodName: OnUp
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  m_FirstSelectEntered:
-    m_PersistentCalls:
-      m_Calls: []
-  m_LastSelectExited:
-    m_PersistentCalls:
-      m_Calls: []
-  m_SelectEntered:
-    m_PersistentCalls:
-      m_Calls: []
-  m_SelectExited:
-    m_PersistentCalls:
-      m_Calls: []
-  m_FirstFocusEntered:
-    m_PersistentCalls:
-      m_Calls: []
-  m_LastFocusExited:
-    m_PersistentCalls:
-      m_Calls: []
-  m_FocusEntered:
-    m_PersistentCalls:
-      m_Calls: []
-  m_FocusExited:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Activated:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Deactivated:
-    m_PersistentCalls:
-      m_Calls: []
-  m_StartingHoverFilters: []
-  m_StartingSelectFilters: []
-  m_StartingInteractionStrengthFilters: []
-  m_AutoFindParentInteractableInHierarchy: 0
-  m_ParentInteractableObject: {fileID: 0}
---- !u!65 &725450228
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 725450226}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &725450229
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 725450226}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_ForceMeshLod: -1
-  m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_MaskInteraction: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &725450230
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 725450226}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &725450231
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 725450226}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0.3305713, w: 0.9437811}
-  m_LocalPosition: {x: -9.471, y: 1.38384, z: -0.536}
-  m_LocalScale: {x: 0.5667287, y: 0.5667287, z: 0.5667287}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 7672110883890290460}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -38.607}
---- !u!114 &725450232
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 725450226}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29e66447d3e84e747a759216a4674ca4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::VRButtonVisual
-  movingPart: {fileID: 725450231}
-  pressDepth: 0.05
-  returnSpeed: 5
---- !u!54 &725450233
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 725450226}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &732956838
 GameObject:
   m_ObjectHideFlags: 0
@@ -9706,52 +9437,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1085374340}
   m_CullTransparentMesh: 1
---- !u!1 &1106560171
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1106560173}
-  - component: {fileID: 1106560172}
-  m_Layer: 0
-  m_Name: XR Interaction Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1106560172
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1106560171}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83e4e6cca11330d4088d729ab4fc9d9f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.XR.Interaction.Toolkit::UnityEngine.XR.Interaction.Toolkit.XRInteractionManager
-  m_StartingHoverFilters: []
-  m_StartingSelectFilters: []
---- !u!4 &1106560173
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1106560171}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.375352, y: 1.4712983, z: -0.555}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1117374924
 GameObject:
   m_ObjectHideFlags: 0
@@ -11365,6 +11050,40 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9032583009701833705, guid: 800b50004767e9749a834158dfef1eb3, type: 3}
   m_PrefabInstance: {fileID: 6786331726713373068}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1274980702 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7917674758240283208, guid: 77e7c27b2c5525e4aa8cc9f99d654486, type: 3}
+  m_PrefabInstance: {fileID: 1373153106}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1274980707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1274980702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29fd5c52c1752ca44b57ce31a026d68a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  distanciaRayo: 10
+  capaBoton:
+    serializedVersion: 2
+    m_Bits: 64
+  botonDeAccion:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Boton De Accion
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 5ff37acf-6728-415a-87b7-d6be717a2787
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  mostrarRayoDebug: 1
 --- !u!4 &1277723421 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3222391660731057103, guid: 3d032f5481d2826478451895128a76f4, type: 3}
@@ -12044,6 +11763,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1644703820982035308, guid: 77e7c27b2c5525e4aa8cc9f99d654486, type: 3}
+      propertyPath: m_InteractionLayers.m_Bits
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1808601201609793989, guid: 77e7c27b2c5525e4aa8cc9f99d654486, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -12268,9 +11991,17 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7536150385392589323, guid: 77e7c27b2c5525e4aa8cc9f99d654486, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7917674758240283208, guid: 77e7c27b2c5525e4aa8cc9f99d654486, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8629926924687228403, guid: 77e7c27b2c5525e4aa8cc9f99d654486, type: 3}
+      propertyPath: m_InteractionLayers.m_Bits
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8806329115733545877, guid: 77e7c27b2c5525e4aa8cc9f99d654486, type: 3}
       propertyPath: m_Name
@@ -12350,6 +12081,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7917674758326848201, guid: 77e7c27b2c5525e4aa8cc9f99d654486, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1118792726}
+    - targetCorrespondingSourceObject: {fileID: 7917674758240283208, guid: 77e7c27b2c5525e4aa8cc9f99d654486, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1274980707}
   m_SourcePrefab: {fileID: 100100000, guid: 77e7c27b2c5525e4aa8cc9f99d654486, type: 3}
 --- !u!1 &1373153107 stripped
 GameObject:
@@ -17852,7 +17586,7 @@ GameObject:
   - component: {fileID: 7672110883890290460}
   - component: {fileID: 3763451430997893661}
   - component: {fileID: 216243035051425658}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pulsador
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19412,7 +19146,7 @@ GameObject:
   - component: {fileID: 7613623900035851003}
   - component: {fileID: 7036197050538329069}
   - component: {fileID: 6150804781174605490}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19683,7 +19417,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3408173426318121371}
-  m_Layer: 0
+  - component: {fileID: 3408173426318121372}
+  - component: {fileID: 3408173426318121373}
+  m_Layer: 6
   m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19758,7 +19494,7 @@ GameObject:
   - component: {fileID: 2252714071311241739}
   - component: {fileID: 5404435649888166184}
   - component: {fileID: 2818285818759705772}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Button004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20037,12 +19773,50 @@ Transform:
   - {fileID: 564656683531834489}
   - {fileID: 2252714071311241739}
   - {fileID: 8415168933781789113}
+  - {fileID: 7672110883890290460}
   - {fileID: 8040800078971257972}
   - {fileID: 4667144583327637065}
   - {fileID: 7256510332826093785}
   - {fileID: 7613623900035851003}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -43.045}
+--- !u!65 &3408173426318121372
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2596205338716685089}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3408173426318121373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2596205338716685089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fc89066461273848a3f4c90a496e995, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  puertaObjeto: {fileID: 4461374879045231288}
+  posicionAbiertaOffset: {x: -0.06, y: 0, z: 0}
+  velocidad: 2
+  tagDeLaMano: Player
 --- !u!114 &3409566788773364300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20759,7 +20533,7 @@ GameObject:
   - component: {fileID: 564656683531834489}
   - component: {fileID: 4436476259438284041}
   - component: {fileID: 3679895576594543412}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Button003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21029,22 +20803,39 @@ PrefabInstance:
       propertyPath: m_Name
       value: MOD_portaSecreta_n3
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1102001415571987776, guid: 7ad2f89570917a94ab5e6f5e667fcc6c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 304042776105894486, guid: 7ad2f89570917a94ab5e6f5e667fcc6c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4461374879045231284}
   m_SourcePrefab: {fileID: 100100000, guid: 7ad2f89570917a94ab5e6f5e667fcc6c, type: 3}
---- !u!114 &4461374879045231283 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1102001415571987776, guid: 7ad2f89570917a94ab5e6f5e667fcc6c, type: 3}
+--- !u!1 &4461374879045231283 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 304042776105894486, guid: 7ad2f89570917a94ab5e6f5e667fcc6c, type: 3}
   m_PrefabInstance: {fileID: 4461374879045231282}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+--- !u!114 &4461374879045231284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4461374879045231283}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0e9ed9a5aef5b54b96e6c6c7864163e, type: 3}
+  m_Script: {fileID: 11500000, guid: e3c66e080b2d4fd408204c2b6ddc4d72, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SlidingDoor
+  m_EditorClassIdentifier: '::'
+  desplazamiento: {x: -0.06, y: 2, z: 0}
+  velocidad: 2
+--- !u!4 &4461374879045231288 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1827719336465034714, guid: 7ad2f89570917a94ab5e6f5e667fcc6c, type: 3}
+  m_PrefabInstance: {fileID: 4461374879045231282}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4667144583327637065
 Transform:
   m_ObjectHideFlags: 0
@@ -21664,7 +21455,7 @@ GameObject:
   - component: {fileID: 4667144583327637065}
   - component: {fileID: 2851676987288070423}
   - component: {fileID: 2055506598935062217}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21836,7 +21627,7 @@ GameObject:
   - component: {fileID: 8040800078971257972}
   - component: {fileID: 1399835009688653305}
   - component: {fileID: 1533068981585656606}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21923,7 +21714,7 @@ GameObject:
   - component: {fileID: 8415168933781789113}
   - component: {fileID: 862330264571335521}
   - component: {fileID: 1450430491339286934}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ButtonBaseTop003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22155,7 +21946,7 @@ GameObject:
   - component: {fileID: 7256510332826093785}
   - component: {fileID: 5242906793930953336}
   - component: {fileID: 8518235751666666129}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22185,12 +21976,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 122325008831152807}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.70657665, y: 0.027376458, z: -0.027376458, w: 0.70657665}
-  m_LocalPosition: {x: 0.027295005, y: 0.11895783, z: -0.03352573}
-  m_LocalScale: {x: 1.7645128, y: 1.7645129, z: 1.7645127}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -0, y: 0.44999963, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 725450231}
+  m_Father: {fileID: 3408173426318121371}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &7751173344413054301
 PrefabInstance:
@@ -22717,6 +22508,4 @@ SceneRoots:
   - {fileID: 1259729621}
   - {fileID: 885380514}
   - {fileID: 767660851}
-  - {fileID: 1106560173}
   - {fileID: 3408173426318121371}
-  - {fileID: 725450231}
