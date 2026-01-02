@@ -738,6 +738,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MOD_n3_armasWooble
       objectReference: {fileID: 0}
+    - target: {fileID: 3588544470611172699, guid: 2902113072a4caf45aca0c1a00b623bf, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: be8c440ffe130884fab8330f12687c8f, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: -5630309807884907710, guid: 2902113072a4caf45aca0c1a00b623bf, type: 3}
