@@ -64,6 +64,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PF_capsulas_n1
       objectReference: {fileID: 0}
+    - target: {fileID: 4191509097384965755, guid: eac4c640cf9464042a4cffa5b83adab0, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

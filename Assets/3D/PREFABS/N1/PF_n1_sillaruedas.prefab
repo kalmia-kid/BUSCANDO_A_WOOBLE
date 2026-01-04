@@ -60,6 +60,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6592852545305768505, guid: 40c57eea8547cb847a2ab9ce8ce3444c, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6d04b8ef54baf364c8e631696ba3af1e, type: 2}
     - target: {fileID: 919132149155446097, guid: 40c57eea8547cb847a2ab9ce8ce3444c, type: 3}
       propertyPath: m_Name
       value: PF_n1_sillaruedas

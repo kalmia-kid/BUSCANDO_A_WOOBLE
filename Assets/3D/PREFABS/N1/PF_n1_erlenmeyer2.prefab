@@ -63,7 +63,7 @@ PrefabInstance:
     - target: {fileID: -7291611550389535122, guid: dbc30df0e6a77944e9524939d8b930f4, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: be8c440ffe130884fab8330f12687c8f, type: 2}
+      objectReference: {fileID: 2100000, guid: f079aa18b7ead2c4e99397348dde2a29, type: 2}
     - target: {fileID: 919132149155446097, guid: dbc30df0e6a77944e9524939d8b930f4, type: 3}
       propertyPath: m_Name
       value: PF_n1_erlenmeyer2

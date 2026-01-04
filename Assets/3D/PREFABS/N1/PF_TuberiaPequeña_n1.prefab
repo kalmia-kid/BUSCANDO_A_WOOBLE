@@ -60,6 +60,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 842377806002518695, guid: f7b8237f4f2db374698500a054831bdb, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 1975c4187000ee84291fbc7e27dc229b, type: 2}
     - target: {fileID: 919132149155446097, guid: f7b8237f4f2db374698500a054831bdb, type: 3}
       propertyPath: m_Name
       value: "PF_TuberiaPeque\xF1a_n1"

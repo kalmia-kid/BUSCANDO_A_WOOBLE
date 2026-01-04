@@ -64,6 +64,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PF_TermometroDigital_n1
       objectReference: {fileID: 0}
+    - target: {fileID: 4075034631802093678, guid: d8c3de4cf0a1a37419e5019759ab5f5f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 069f60f94689f444d939b60ac65b17be, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

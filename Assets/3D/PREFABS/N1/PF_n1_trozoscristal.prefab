@@ -62,8 +62,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 326991ca155e02847a1369cb3a9bf20b, type: 3}
       propertyPath: m_Name
-      value: MOD_n1_trozoscristal
+      value: PF_n1_trozoscristal
       objectReference: {fileID: 0}
+    - target: {fileID: 2391888438125463012, guid: 326991ca155e02847a1369cb3a9bf20b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2775ae238f9d2db44a3a727dec9a1eb4, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
