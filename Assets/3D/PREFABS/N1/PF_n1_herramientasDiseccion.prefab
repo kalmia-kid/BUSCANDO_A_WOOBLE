@@ -60,10 +60,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -4217872796012035180, guid: 2a2197bf5e3ce25499d76875848ac8b0, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9eba8f845a4fb4544955350d721754e9, type: 2}
+    - target: {fileID: -3495804386883301792, guid: 2a2197bf5e3ce25499d76875848ac8b0, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9eba8f845a4fb4544955350d721754e9, type: 2}
+    - target: {fileID: -1925653278346542190, guid: 2a2197bf5e3ce25499d76875848ac8b0, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9eba8f845a4fb4544955350d721754e9, type: 2}
+    - target: {fileID: -196596538773308217, guid: 2a2197bf5e3ce25499d76875848ac8b0, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9eba8f845a4fb4544955350d721754e9, type: 2}
     - target: {fileID: 919132149155446097, guid: 2a2197bf5e3ce25499d76875848ac8b0, type: 3}
       propertyPath: m_Name
       value: PF_n1_herramientasDiseccion
       objectReference: {fileID: 0}
+    - target: {fileID: 2035007941314017396, guid: 2a2197bf5e3ce25499d76875848ac8b0, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9eba8f845a4fb4544955350d721754e9, type: 2}
+    - target: {fileID: 2462799115721674550, guid: 2a2197bf5e3ce25499d76875848ac8b0, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9eba8f845a4fb4544955350d721754e9, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
