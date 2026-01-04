@@ -15,9 +15,9 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 10
   m_Fog: 1
-  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_FogColor: {r: 0.09540761, g: 0.13107522, b: 0.3018868, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.05
+  m_FogDensity: 0.051
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.20599997, g: 0.46132573, b: 1, a: 1}
@@ -11692,7 +11692,7 @@ PrefabInstance:
     - target: {fileID: -580209388721252042, guid: 270e1028131e4224a954365149b80704, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: be8c440ffe130884fab8330f12687c8f, type: 2}
+      objectReference: {fileID: 2100000, guid: 5e071231633a2c74dbe8fbcd3d9b3740, type: 2}
     - target: {fileID: 919132149155446097, guid: 270e1028131e4224a954365149b80704, type: 3}
       propertyPath: m_Name
       value: BLOCKINGIMBESIL
