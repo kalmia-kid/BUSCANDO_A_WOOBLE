@@ -8,6 +8,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -9215168426471727345, guid: d6f83dafc4d89ba4a957a2563508ff61, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fac163fe3b8351a4fa908155a9e6958c, type: 2}
+    - target: {fileID: -8806879054169552267, guid: d6f83dafc4d89ba4a957a2563508ff61, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.104
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d6f83dafc4d89ba4a957a2563508ff61, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.0165
@@ -60,10 +68,158 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8491587897113625425, guid: d6f83dafc4d89ba4a957a2563508ff61, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fac163fe3b8351a4fa908155a9e6958c, type: 2}
+    - target: {fileID: -7352187663546387883, guid: d6f83dafc4d89ba4a957a2563508ff61, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fac163fe3b8351a4fa908155a9e6958c, type: 2}
+    - target: {fileID: -7075301587991209361, guid: d6f83dafc4d89ba4a957a2563508ff61, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fac163fe3b8351a4fa908155a9e6958c, type: 2}
+    - target: {fileID: -6822150751136558713, guid: d6f83dafc4d89ba4a957a2563508ff61, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fac163fe3b8351a4fa908155a9e6958c, type: 2}
+    - target: {fileID: -6759242271380740880, guid: d6f83dafc4d89ba4a957a2563508ff61, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fac163fe3b8351a4fa908155a9e6958c, type: 2}
+    - target: {fileID: -6724353817019060561, guid: d6f83dafc4d89ba4a957a2563508ff61, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.075
+      objectReference: {fileID: 0}
+    - target: {fileID: -5514157478281418827, guid: d6f83dafc4d89ba4a957a2563508ff61, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fac163fe3b8351a4fa908155a9e6958c, type: 2}
+    - target: {fileID: -5208326016713724021, guid: d6f83dafc4d89ba4a957a2563508ff61, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fac163fe3b8351a4fa908155a9e6958c, type: 2}
+    - target: {fileID: -5155317631478967199, guid: d6f83dafc4d89ba4a957a2563508ff61, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fac163fe3b8351a4fa908155a9e6958c, type: 2}
+    - target: {fileID: -5134479834179434526, guid: d6f83dafc4d89ba4a957a2563508ff61, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fac163fe3b8351a4fa908155a9e6958c, type: 2}
+    - target: {fileID: -5104189020303549411, guid: d6f83dafc4d89ba4a957a2563508ff61, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fac163fe3b8351a4fa908155a9e6958c, type: 2}
+    - target: {fileID: -4278320984941710965, guid: d6f83dafc4d89ba4a957a2563508ff61, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.117
+      objectReference: {fileID: 0}
+    - target: {fileID: -3356249958346338195, guid: d6f83dafc4d89ba4a957a2563508ff61, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fac163fe3b8351a4fa908155a9e6958c, type: 2}
+    - target: {fileID: -2410785459537063095, guid: d6f83dafc4d89ba4a957a2563508ff61, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fac163fe3b8351a4fa908155a9e6958c, type: 2}
+    - target: {fileID: -2127576383752557981, guid: d6f83dafc4d89ba4a957a2563508ff61, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fac163fe3b8351a4fa908155a9e6958c, type: 2}
+    - target: {fileID: -545527951665436992, guid: d6f83dafc4d89ba4a957a2563508ff61, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fac163fe3b8351a4fa908155a9e6958c, type: 2}
+    - target: {fileID: -256708390337768261, guid: d6f83dafc4d89ba4a957a2563508ff61, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fac163fe3b8351a4fa908155a9e6958c, type: 2}
+    - target: {fileID: -178893103828795863, guid: d6f83dafc4d89ba4a957a2563508ff61, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fac163fe3b8351a4fa908155a9e6958c, type: 2}
+    - target: {fileID: -175150181686107807, guid: d6f83dafc4d89ba4a957a2563508ff61, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.118
+      objectReference: {fileID: 0}
+    - target: {fileID: 455002595038237429, guid: d6f83dafc4d89ba4a957a2563508ff61, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fac163fe3b8351a4fa908155a9e6958c, type: 2}
+    - target: {fileID: 653086746918997885, guid: d6f83dafc4d89ba4a957a2563508ff61, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fac163fe3b8351a4fa908155a9e6958c, type: 2}
     - target: {fileID: 919132149155446097, guid: d6f83dafc4d89ba4a957a2563508ff61, type: 3}
       propertyPath: m_Name
       value: PF_n1_papelesPorElSuelo
       objectReference: {fileID: 0}
+    - target: {fileID: 1147603028365103434, guid: d6f83dafc4d89ba4a957a2563508ff61, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1154344405597166845, guid: d6f83dafc4d89ba4a957a2563508ff61, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fac163fe3b8351a4fa908155a9e6958c, type: 2}
+    - target: {fileID: 1524696649874397354, guid: d6f83dafc4d89ba4a957a2563508ff61, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.091
+      objectReference: {fileID: 0}
+    - target: {fileID: 3786193865465041968, guid: d6f83dafc4d89ba4a957a2563508ff61, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.121
+      objectReference: {fileID: 0}
+    - target: {fileID: 4264751817582155588, guid: d6f83dafc4d89ba4a957a2563508ff61, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 5496955846580573579, guid: d6f83dafc4d89ba4a957a2563508ff61, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fac163fe3b8351a4fa908155a9e6958c, type: 2}
+    - target: {fileID: 6574333468769961499, guid: d6f83dafc4d89ba4a957a2563508ff61, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fac163fe3b8351a4fa908155a9e6958c, type: 2}
+    - target: {fileID: 7552735241494941413, guid: d6f83dafc4d89ba4a957a2563508ff61, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fac163fe3b8351a4fa908155a9e6958c, type: 2}
+    - target: {fileID: 7677247403388603325, guid: d6f83dafc4d89ba4a957a2563508ff61, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.373
+      objectReference: {fileID: 0}
+    - target: {fileID: 7677247403388603325, guid: d6f83dafc4d89ba4a957a2563508ff61, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.129
+      objectReference: {fileID: 0}
+    - target: {fileID: 7677247403388603325, guid: d6f83dafc4d89ba4a957a2563508ff61, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.902
+      objectReference: {fileID: 0}
+    - target: {fileID: 8161289729145825876, guid: d6f83dafc4d89ba4a957a2563508ff61, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fac163fe3b8351a4fa908155a9e6958c, type: 2}
+    - target: {fileID: 8395649984415857568, guid: d6f83dafc4d89ba4a957a2563508ff61, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fac163fe3b8351a4fa908155a9e6958c, type: 2}
+    - target: {fileID: 8616246968305251837, guid: d6f83dafc4d89ba4a957a2563508ff61, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fac163fe3b8351a4fa908155a9e6958c, type: 2}
+    - target: {fileID: 8657458613381743141, guid: d6f83dafc4d89ba4a957a2563508ff61, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fac163fe3b8351a4fa908155a9e6958c, type: 2}
+    - target: {fileID: 8678070018020628864, guid: d6f83dafc4d89ba4a957a2563508ff61, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fac163fe3b8351a4fa908155a9e6958c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1058,7 +1214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0a1302d0d134fa8a2a5b3bf4aec3c20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.XR.Interaction.Toolkit::UnityEngine.XR.Interaction.Toolkit.Transformers.XRGeneralGrabTransformer
-  m_PermittedDisplacementAxes: 7
+  m_PermittedDisplacementAxes: -1
   m_ConstrainedAxisDisplacementMode: 1
   m_TwoHandedRotationMode: 1
   m_AllowOneHandedScaling: 1
@@ -1263,7 +1419,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0a1302d0d134fa8a2a5b3bf4aec3c20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.XR.Interaction.Toolkit::UnityEngine.XR.Interaction.Toolkit.Transformers.XRGeneralGrabTransformer
-  m_PermittedDisplacementAxes: 7
+  m_PermittedDisplacementAxes: -1
   m_ConstrainedAxisDisplacementMode: 1
   m_TwoHandedRotationMode: 1
   m_AllowOneHandedScaling: 1
@@ -1468,7 +1624,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0a1302d0d134fa8a2a5b3bf4aec3c20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.XR.Interaction.Toolkit::UnityEngine.XR.Interaction.Toolkit.Transformers.XRGeneralGrabTransformer
-  m_PermittedDisplacementAxes: 7
+  m_PermittedDisplacementAxes: -1
   m_ConstrainedAxisDisplacementMode: 1
   m_TwoHandedRotationMode: 1
   m_AllowOneHandedScaling: 1
@@ -1673,7 +1829,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0a1302d0d134fa8a2a5b3bf4aec3c20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.XR.Interaction.Toolkit::UnityEngine.XR.Interaction.Toolkit.Transformers.XRGeneralGrabTransformer
-  m_PermittedDisplacementAxes: 7
+  m_PermittedDisplacementAxes: -1
   m_ConstrainedAxisDisplacementMode: 1
   m_TwoHandedRotationMode: 1
   m_AllowOneHandedScaling: 1
@@ -2083,7 +2239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0a1302d0d134fa8a2a5b3bf4aec3c20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.XR.Interaction.Toolkit::UnityEngine.XR.Interaction.Toolkit.Transformers.XRGeneralGrabTransformer
-  m_PermittedDisplacementAxes: 7
+  m_PermittedDisplacementAxes: -1
   m_ConstrainedAxisDisplacementMode: 1
   m_TwoHandedRotationMode: 1
   m_AllowOneHandedScaling: 1
@@ -4133,7 +4289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0a1302d0d134fa8a2a5b3bf4aec3c20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.XR.Interaction.Toolkit::UnityEngine.XR.Interaction.Toolkit.Transformers.XRGeneralGrabTransformer
-  m_PermittedDisplacementAxes: 7
+  m_PermittedDisplacementAxes: -1
   m_ConstrainedAxisDisplacementMode: 1
   m_TwoHandedRotationMode: 1
   m_AllowOneHandedScaling: 1
@@ -4543,7 +4699,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0a1302d0d134fa8a2a5b3bf4aec3c20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.XR.Interaction.Toolkit::UnityEngine.XR.Interaction.Toolkit.Transformers.XRGeneralGrabTransformer
-  m_PermittedDisplacementAxes: 7
+  m_PermittedDisplacementAxes: -1
   m_ConstrainedAxisDisplacementMode: 1
   m_TwoHandedRotationMode: 1
   m_AllowOneHandedScaling: 1
@@ -4953,7 +5109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0a1302d0d134fa8a2a5b3bf4aec3c20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.XR.Interaction.Toolkit::UnityEngine.XR.Interaction.Toolkit.Transformers.XRGeneralGrabTransformer
-  m_PermittedDisplacementAxes: 7
+  m_PermittedDisplacementAxes: -1
   m_ConstrainedAxisDisplacementMode: 1
   m_TwoHandedRotationMode: 1
   m_AllowOneHandedScaling: 1
@@ -5363,7 +5519,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0a1302d0d134fa8a2a5b3bf4aec3c20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.XR.Interaction.Toolkit::UnityEngine.XR.Interaction.Toolkit.Transformers.XRGeneralGrabTransformer
-  m_PermittedDisplacementAxes: 7
+  m_PermittedDisplacementAxes: -1
   m_ConstrainedAxisDisplacementMode: 1
   m_TwoHandedRotationMode: 1
   m_AllowOneHandedScaling: 1
@@ -5978,7 +6134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0a1302d0d134fa8a2a5b3bf4aec3c20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.XR.Interaction.Toolkit::UnityEngine.XR.Interaction.Toolkit.Transformers.XRGeneralGrabTransformer
-  m_PermittedDisplacementAxes: 7
+  m_PermittedDisplacementAxes: -1
   m_ConstrainedAxisDisplacementMode: 1
   m_TwoHandedRotationMode: 1
   m_AllowOneHandedScaling: 1

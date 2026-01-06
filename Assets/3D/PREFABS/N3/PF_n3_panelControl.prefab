@@ -62,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f2d67d7ee6914f0478a975a6bf64515d, type: 3}
       propertyPath: m_Name
-      value: MOD_n3_panelControl
+      value: PF_n3_panelControl
       objectReference: {fileID: 0}
     - target: {fileID: 3731221762528707847, guid: f2d67d7ee6914f0478a975a6bf64515d, type: 3}
       propertyPath: m_LocalScale.x
@@ -87,7 +87,7 @@ PrefabInstance:
     - target: {fileID: 6404047638034210956, guid: f2d67d7ee6914f0478a975a6bf64515d, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: be8c440ffe130884fab8330f12687c8f, type: 2}
+      objectReference: {fileID: 2100000, guid: ad920f96418096c4aace73cefe97fa15, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

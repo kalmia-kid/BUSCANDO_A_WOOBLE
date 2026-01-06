@@ -62,12 +62,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 00dd475a9b6ba76409a740b05a650653, type: 3}
       propertyPath: m_Name
-      value: MOD_n3_sillaNave
+      value: PF_n3_sillaNave
       objectReference: {fileID: 0}
     - target: {fileID: 3057461244034250485, guid: 00dd475a9b6ba76409a740b05a650653, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: be8c440ffe130884fab8330f12687c8f, type: 2}
+      objectReference: {fileID: 2100000, guid: 4269b931b0f08274196ac4181f3bbcc1, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 4332526534569588531, guid: 00dd475a9b6ba76409a740b05a650653, type: 3}
