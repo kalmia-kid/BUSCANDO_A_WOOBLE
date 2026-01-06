@@ -1,15 +1,22 @@
 using UnityEngine;
 using System.Collections;
-using UnityEngine.XR.Interaction.Toolkit.Interactables; // Asegúrate de que esta referencia es correcta para tu versión de XR
+using UnityEngine.XR.Interaction.Toolkit.Interactables; 
 
 public class CaptureDevice : MonoBehaviour
 {
-    [Header("Configuración de Agarre (NUEVO)")]
+    [Header("Configuración de Agarre")]
     [Tooltip("El punto en el dispositivo donde el alien debe quedar pegado (la punta).")]
     public Transform deviceAttachmentPoint; 
     
     [Tooltip("El nombre exacto del objeto dentro del Alien que debe coincidir con la punta.")]
     public string alienGrabPointName = "Wooble_Grab";
+
+    [Header("Audio")] 
+    public AudioClip captureSound;    // Sonido inicial (al tocar)
+    public AudioClip absorptionSound; // Sonido intermedio (al absorber)
+    public AudioClip notebookSound;   // NUEVO: Sonido final (al salir el notebook)
+    
+    private AudioSource audioSource;
 
     [Header("Efectos y Contención")]
     public GameObject containmentEffect;
@@ -18,15 +25,14 @@ public class CaptureDevice : MonoBehaviour
     public float absorptionEffectDuration = 0.1f;
     public Collider captureCollider;
 
-    // ... (Funciones PlayEffect y StopEffect se mantienen igual) ...
     private void PlayEffect(GameObject effectObject)
     {
         if (effectObject == null) return;
         effectObject.SetActive(true);
         ParticleSystem ps = effectObject.GetComponent<ParticleSystem>();
         if (ps != null && !ps.isPlaying) ps.Play(true);
-        AudioSource audioSource = effectObject.GetComponent<AudioSource>();
-        if (audioSource != null && !audioSource.isPlaying) audioSource.Play();
+        AudioSource effectAudio = effectObject.GetComponent<AudioSource>();
+        if (effectAudio != null && !effectAudio.isPlaying) effectAudio.Play();
     }
 
     private void StopEffect(GameObject effectObject)
@@ -34,8 +40,8 @@ public class CaptureDevice : MonoBehaviour
         if (effectObject == null) return;
         ParticleSystem ps = effectObject.GetComponent<ParticleSystem>();
         if (ps != null) ps.Stop(true, ParticleSystemStopBehavior.StopEmitting);
-        AudioSource audioSource = effectObject.GetComponent<AudioSource>();
-        if (audioSource != null) audioSource.Stop();
+        AudioSource effectAudio = effectObject.GetComponent<AudioSource>();
+        if (effectAudio != null) effectAudio.Stop();
         effectObject.SetActive(false);
     }
 
@@ -44,7 +50,18 @@ public class CaptureDevice : MonoBehaviour
         StopEffect(containmentEffect);
         StopEffect(absorptionEffect);
 
-        // Si no has asignado el punto de agarre en el inspector, usamos el propio transform del objeto como "punta" por defecto
+        // CONFIGURACIÓN DE AUDIO
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource.spatialBlend = 1.0f; 
+        }
+
+        // CORRECCIÓN: EVITAR QUE SUENE AL DARLE AL PLAY
+        audioSource.playOnAwake = false; 
+        audioSource.Stop();              
+
         if (deviceAttachmentPoint == null)
         {
             deviceAttachmentPoint = this.transform;
@@ -61,7 +78,7 @@ public class CaptureDevice : MonoBehaviour
             if (woobleToCapture != null && !woobleToCapture.IsCaptured)
             {
                 XRGrabInteractable grabInteractable = GetComponent<XRGrabInteractable>();
-                // Comprobamos si el jugador tiene el arma agarrada (opcional, según tu diseño)
+                
                 if (grabInteractable != null && grabInteractable.isSelected)
                 {
                     StartCoroutine(CaptureSequence(woobleToCapture));
@@ -75,42 +92,36 @@ public class CaptureDevice : MonoBehaviour
         // 1. INICIO DE LA CAPTURA
         wooble.StartCapture();
 
+        // REPRODUCIR SONIDO INICIAL (CAPTURE)
+        if (audioSource != null && captureSound != null)
+        {
+            audioSource.PlayOneShot(captureSound);
+        }
+
         if (captureCollider != null) captureCollider.enabled = false;
 
         wooble.DisablePhysicsAndMovement();
 
-        // 2. ACTIVAR EFECTO Y ANCLAJE (LÓGICA MEJORADA)
-        
-        // Primero hacemos hijo al alien del punto de anclaje
+        // 2. ACTIVAR EFECTO Y ANCLAJE
         wooble.transform.SetParent(deviceAttachmentPoint);
 
-        // --- INICIO LÓGICA DE SNAPPING (Wooble_Grab a DeviceAttachmentPoint) ---
-        
-        // Buscamos el punto de agarre DENTRO del alien
+        // LÓGICA DE SNAPPING
         Transform alienGrabPoint = FindDeepChild(wooble.transform, alienGrabPointName);
 
         if (alienGrabPoint != null)
         {
-            // A. ALINEAR ROTACIÓN
-            // Rotamos el alien para que la rotación del grab point coincida con la del attachment point.
-            // La fórmula es: RotaciónDestino * Inversa(RotaciónLocalDelHijo)
             Quaternion targetRotation = deviceAttachmentPoint.rotation * Quaternion.Inverse(alienGrabPoint.localRotation);
             wooble.transform.rotation = targetRotation;
 
-            // B. ALINEAR POSICIÓN
-            // Ahora que la rotación es correcta, calculamos la diferencia de posición
-            // Queremos que alienGrabPoint.position sea igual a deviceAttachmentPoint.position
             Vector3 positionOffset = alienGrabPoint.position - wooble.transform.position;
             wooble.transform.position = deviceAttachmentPoint.position - positionOffset;
         }
         else
         {
-            // Fallback: Si no encuentra "Wooble_Grab", lo pega al centro como antes
             Debug.LogWarning($"No se encontró el objeto '{alienGrabPointName}' dentro del Wooble. Usando posición 0.");
             wooble.transform.localPosition = Vector3.zero;
             wooble.transform.localRotation = Quaternion.identity;
         }
-        // --- FIN LÓGICA DE SNAPPING ---
 
         PlayEffect(containmentEffect);
 
@@ -119,18 +130,35 @@ public class CaptureDevice : MonoBehaviour
         // 3. ABSORCIÓN FINAL
         StopEffect(containmentEffect);
         PlayEffect(absorptionEffect);
+
+        // REPRODUCIR SONIDO DE ABSORCIÓN
+        if (audioSource != null && absorptionSound != null)
+        {
+            audioSource.PlayOneShot(absorptionSound);
+        }
         
         wooble.FinalizeDisappearance();
 
         yield return new WaitForSeconds(absorptionEffectDuration);
         StopEffect(absorptionEffect);
 
-        // 4. REACTIVACIÓN
+        // 4. REACTIVACIÓN Y FINAL DE MISIÓN
         if (captureCollider != null) captureCollider.enabled = true;
-        if (GameManager.Instance != null) GameManager.Instance.OnMissionComplete();
+
+        // --- NUEVO: SONIDO DEL NOTEBOOK AGENT ---
+        // Lo reproducimos justo antes de llamar al GameManager
+        if (audioSource != null && notebookSound != null)
+        {
+            audioSource.PlayOneShot(notebookSound);
+        }
+        // ----------------------------------------
+
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.OnMissionComplete();
+        }
     }
 
-    // Función auxiliar para buscar hijos en profundidad (por si Wooble_Grab está dentro de otros huesos)
     private Transform FindDeepChild(Transform parent, string name)
     {
         foreach (Transform child in parent)

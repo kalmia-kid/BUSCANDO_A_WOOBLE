@@ -445,6 +445,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1d1dda32fa7dbb645b1891bf8c7d6df3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4879863332143645822}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1d1dda32fa7dbb645b1891bf8c7d6df3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6208191261304207476}
   m_SourcePrefab: {fileID: 100100000, guid: 1d1dda32fa7dbb645b1891bf8c7d6df3, type: 3}
 --- !u!1 &5042081745013242751 stripped
 GameObject:
@@ -643,6 +646,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   deviceAttachmentPoint: {fileID: 7549599829388590773}
   alienGrabPointName: Wooble_Grab
+  captureSound: {fileID: 8300000, guid: 4935d92fc61361f40b0cf630768af30e, type: 3}
+  absorptionSound: {fileID: 8300000, guid: 41f6480316891a9409dcaad069e6ad9f, type: 3}
+  notebookSound: {fileID: 8300000, guid: 52d2b0b61f12b3e40b50cc29f688c815, type: 3}
   containmentEffect: {fileID: 2442710914328632080}
   absorptionEffect: {fileID: 8500832272359865229}
   anchorTimeBeforeDisappearance: 3
@@ -669,6 +675,103 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3.5462592, y: 18.073652, z: 6.4695845}
   m_Center: {x: -0.5226834, y: 5.135841, z: -6.623922}
+--- !u!82 &6208191261304207476
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5042081745013242751}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: 4935d92fc61361f40b0cf630768af30e, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 2.47391
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!4 &5670808248636056005 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1d1dda32fa7dbb645b1891bf8c7d6df3, type: 3}
@@ -741,7 +844,7 @@ PrefabInstance:
     - target: {fileID: 3588544470611172699, guid: 2902113072a4caf45aca0c1a00b623bf, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: be8c440ffe130884fab8330f12687c8f, type: 2}
+      objectReference: {fileID: 2100000, guid: 6b37e63f294f471498959e86ddaed175, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: -5630309807884907710, guid: 2902113072a4caf45aca0c1a00b623bf, type: 3}
