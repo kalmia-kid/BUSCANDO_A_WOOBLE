@@ -9309,6 +9309,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: XR Device Simulator
       objectReference: {fileID: 0}
+    - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14254,6 +14258,22 @@ PrefabInstance:
     - target: {fileID: 5442018586182647650, guid: 77e7c27b2c5525e4aa8cc9f99d654486, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5518899284880179293, guid: 77e7c27b2c5525e4aa8cc9f99d654486, type: 3}
+      propertyPath: m_LocomotionVignetteProviders.Array.data[0].m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5518899284880179293, guid: 77e7c27b2c5525e4aa8cc9f99d654486, type: 3}
+      propertyPath: m_LocomotionVignetteProviders.Array.data[1].m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5518899284880179293, guid: 77e7c27b2c5525e4aa8cc9f99d654486, type: 3}
+      propertyPath: m_LocomotionVignetteProviders.Array.data[2].m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5518899284880179293, guid: 77e7c27b2c5525e4aa8cc9f99d654486, type: 3}
+      propertyPath: m_LocomotionVignetteProviders.Array.data[3].m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7917674758240283208, guid: 77e7c27b2c5525e4aa8cc9f99d654486, type: 3}
       propertyPath: m_IsActive
