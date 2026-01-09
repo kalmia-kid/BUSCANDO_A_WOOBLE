@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: -8850674482460690573, guid: 112518e431b6d864280334a7476492b8, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: be8c440ffe130884fab8330f12687c8f, type: 2}
+      objectReference: {fileID: 2100000, guid: e72fe514fdaf0ff4f87c22aa2d6046ef, type: 2}
     - target: {fileID: -8679921383154817045, guid: 112518e431b6d864280334a7476492b8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -12.287307
@@ -55,7 +55,7 @@ PrefabInstance:
     - target: {fileID: -4816443087293683663, guid: 112518e431b6d864280334a7476492b8, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: be8c440ffe130884fab8330f12687c8f, type: 2}
+      objectReference: {fileID: 2100000, guid: e72fe514fdaf0ff4f87c22aa2d6046ef, type: 2}
     - target: {fileID: -4643551342287182657, guid: 112518e431b6d864280334a7476492b8, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -63,27 +63,27 @@ PrefabInstance:
     - target: {fileID: -4443878192298610673, guid: 112518e431b6d864280334a7476492b8, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: be8c440ffe130884fab8330f12687c8f, type: 2}
+      objectReference: {fileID: 2100000, guid: e72fe514fdaf0ff4f87c22aa2d6046ef, type: 2}
     - target: {fileID: -3220737819458962837, guid: 112518e431b6d864280334a7476492b8, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: be8c440ffe130884fab8330f12687c8f, type: 2}
+      objectReference: {fileID: 2100000, guid: e72fe514fdaf0ff4f87c22aa2d6046ef, type: 2}
     - target: {fileID: -3131723984325765934, guid: 112518e431b6d864280334a7476492b8, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: be8c440ffe130884fab8330f12687c8f, type: 2}
+      objectReference: {fileID: 2100000, guid: e72fe514fdaf0ff4f87c22aa2d6046ef, type: 2}
     - target: {fileID: 919132149155446097, guid: 112518e431b6d864280334a7476492b8, type: 3}
       propertyPath: m_Name
-      value: MOD_PelucheAgustiDelRio_n3
+      value: PF_PelucheAgustiDelRio_n3
       objectReference: {fileID: 0}
     - target: {fileID: 6604098646252356627, guid: 112518e431b6d864280334a7476492b8, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: be8c440ffe130884fab8330f12687c8f, type: 2}
+      objectReference: {fileID: 2100000, guid: e72fe514fdaf0ff4f87c22aa2d6046ef, type: 2}
     - target: {fileID: 7933744289469162096, guid: 112518e431b6d864280334a7476492b8, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: be8c440ffe130884fab8330f12687c8f, type: 2}
+      objectReference: {fileID: 2100000, guid: e72fe514fdaf0ff4f87c22aa2d6046ef, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

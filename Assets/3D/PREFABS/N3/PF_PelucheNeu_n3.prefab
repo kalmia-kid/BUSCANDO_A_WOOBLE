@@ -51,27 +51,27 @@ PrefabInstance:
     - target: {fileID: -8044071486604395298, guid: 67d45a8d54f82704fb21ed79539c164b, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: be8c440ffe130884fab8330f12687c8f, type: 2}
+      objectReference: {fileID: 2100000, guid: f2845b5524714354c8af3070686c302a, type: 2}
     - target: {fileID: -1941744372884398654, guid: 67d45a8d54f82704fb21ed79539c164b, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: be8c440ffe130884fab8330f12687c8f, type: 2}
+      objectReference: {fileID: 2100000, guid: f2845b5524714354c8af3070686c302a, type: 2}
     - target: {fileID: -1288973191904966847, guid: 67d45a8d54f82704fb21ed79539c164b, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: be8c440ffe130884fab8330f12687c8f, type: 2}
+      objectReference: {fileID: 2100000, guid: f2845b5524714354c8af3070686c302a, type: 2}
     - target: {fileID: 919132149155446097, guid: 67d45a8d54f82704fb21ed79539c164b, type: 3}
       propertyPath: m_Name
-      value: MOD_PelucheNeu_n3
+      value: PF_PelucheNeu_n3
       objectReference: {fileID: 0}
     - target: {fileID: 920485439939218936, guid: 67d45a8d54f82704fb21ed79539c164b, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: be8c440ffe130884fab8330f12687c8f, type: 2}
+      objectReference: {fileID: 2100000, guid: f2845b5524714354c8af3070686c302a, type: 2}
     - target: {fileID: 3902492920922674225, guid: 67d45a8d54f82704fb21ed79539c164b, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: be8c440ffe130884fab8330f12687c8f, type: 2}
+      objectReference: {fileID: 2100000, guid: f2845b5524714354c8af3070686c302a, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

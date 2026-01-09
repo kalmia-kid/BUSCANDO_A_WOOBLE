@@ -74,12 +74,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c7b396b3afe4e0042ad173d5080fb49f, type: 3}
       propertyPath: m_Name
-      value: MOD_Estanteria_n3
+      value: PF_Estanteria_n3
       objectReference: {fileID: 0}
     - target: {fileID: 7287619013787293777, guid: c7b396b3afe4e0042ad173d5080fb49f, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: be8c440ffe130884fab8330f12687c8f, type: 2}
+      objectReference: {fileID: 2100000, guid: a0c6c442436d7c949bf6803a002e30a2, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

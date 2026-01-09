@@ -51,10 +51,10 @@ PrefabInstance:
     - target: {fileID: -6352558488159615247, guid: 098cd45574696514d8f45ba2af6571ee, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: be8c440ffe130884fab8330f12687c8f, type: 2}
+      objectReference: {fileID: 2100000, guid: e2f88ef1bb319bf4babd595ac27425bd, type: 2}
     - target: {fileID: 919132149155446097, guid: 098cd45574696514d8f45ba2af6571ee, type: 3}
       propertyPath: m_Name
-      value: MOD_TablaWooble_n3
+      value: PF_TablaWooble_n3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
