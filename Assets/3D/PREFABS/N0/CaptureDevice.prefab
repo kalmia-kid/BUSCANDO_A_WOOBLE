@@ -646,9 +646,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   deviceAttachmentPoint: {fileID: 7549599829388590773}
   alienGrabPointName: Wooble_Grab
-  captureSound: {fileID: 8300000, guid: 4935d92fc61361f40b0cf630768af30e, type: 3}
-  absorptionSound: {fileID: 8300000, guid: 41f6480316891a9409dcaad069e6ad9f, type: 3}
-  notebookSound: {fileID: 8300000, guid: 52d2b0b61f12b3e40b50cc29f688c815, type: 3}
+  captureSound: {fileID: 8300000, guid: 3f712ca5f65bfa94ca2d151b26b9401f, type: 3}
+  absorptionSound: {fileID: 8300000, guid: de2541f7742911a42a3827ec11612f36, type: 3}
+  notebookSound: {fileID: 8300000, guid: f54eb67a7dbd6af43904cfd383c36cc7, type: 3}
   containmentEffect: {fileID: 2442710914328632080}
   absorptionEffect: {fileID: 8500832272359865229}
   anchorTimeBeforeDisappearance: 3
@@ -844,7 +844,7 @@ PrefabInstance:
     - target: {fileID: 3588544470611172699, guid: 2902113072a4caf45aca0c1a00b623bf, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 6b37e63f294f471498959e86ddaed175, type: 2}
+      objectReference: {fileID: 2100000, guid: 291130983849c4249b06976882fd5359, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: -5630309807884907710, guid: 2902113072a4caf45aca0c1a00b623bf, type: 3}
