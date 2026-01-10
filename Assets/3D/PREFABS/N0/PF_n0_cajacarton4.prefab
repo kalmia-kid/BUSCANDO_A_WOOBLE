@@ -60,6 +60,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -2659460587329350140, guid: 8969846bc5ea5524f8eeb1c58b0206ad, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2659460587329350140, guid: 8969846bc5ea5524f8eeb1c58b0206ad, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2659460587329350140, guid: 8969846bc5ea5524f8eeb1c58b0206ad, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8969846bc5ea5524f8eeb1c58b0206ad, type: 3}
       propertyPath: m_Name
       value: PF_n0_cajacarton4
