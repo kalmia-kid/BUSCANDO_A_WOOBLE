@@ -48,9 +48,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -3795130514599805408, guid: 598302d50f2e26b4da0d63754c01f993, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: aec3a05ff78dabf42a48aa8ccc7e3c9b, type: 2}
     - target: {fileID: 919132149155446097, guid: 598302d50f2e26b4da0d63754c01f993, type: 3}
       propertyPath: m_Name
-      value: MOD_CableGrande2_n2
+      value: PF_CableGrande2_n2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
