@@ -12503,6 +12503,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1957053503340664469, guid: 77e7c27b2c5525e4aa8cc9f99d654486, type: 3}
+      propertyPath: m_PlayHoverEntered
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2243020122175513880, guid: 77e7c27b2c5525e4aa8cc9f99d654486, type: 3}
       propertyPath: m_SizeDelta.x
       value: 80
@@ -12809,6 +12813,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8806329115733545878, guid: 77e7c27b2c5525e4aa8cc9f99d654486, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8806886322617632778, guid: 77e7c27b2c5525e4aa8cc9f99d654486, type: 3}
+      propertyPath: m_PlayHoverEntered
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -22211,6 +22219,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6523837}
     m_Modifications:
+    - target: {fileID: 2553918892801468559, guid: f62a48cc48e36564b847ccf05fbb6151, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.0024560743
+      objectReference: {fileID: 0}
+    - target: {fileID: 2553918892801468559, guid: f62a48cc48e36564b847ccf05fbb6151, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.0024560743
+      objectReference: {fileID: 0}
+    - target: {fileID: 2553918892801468559, guid: f62a48cc48e36564b847ccf05fbb6151, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.0024560743
+      objectReference: {fileID: 0}
+    - target: {fileID: 2553918892801468559, guid: f62a48cc48e36564b847ccf05fbb6151, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.0000221
+      objectReference: {fileID: 0}
+    - target: {fileID: 2553918892801468559, guid: f62a48cc48e36564b847ccf05fbb6151, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0002801
+      objectReference: {fileID: 0}
+    - target: {fileID: 2553918892801468559, guid: f62a48cc48e36564b847ccf05fbb6151, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.0000129
+      objectReference: {fileID: 0}
     - target: {fileID: 3693110354276777817, guid: f62a48cc48e36564b847ccf05fbb6151, type: 3}
       propertyPath: m_Name
       value: Wrist_Watch
